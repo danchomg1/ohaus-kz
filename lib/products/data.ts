@@ -1053,4 +1053,322 @@ export const products: Product[] = [
       { label: "Сертификат", value: "ISO/IEC 17025, NIST" },
     ],
   },
+
+  // ===================== Платформенные весы =====================
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "defender-5000-ss",
+    name: "Defender™ 5000, нержавеющая сталь",
+    series: "defender-5000",
+    seriesLabel: "Defender™ 5000",
+    image: `${CDN}/e847c058-4160-476c-96a7-8537332563c5/Defender_5000_Washdown_D52_Main_600x600_1`,
+    summary:
+      "Платформенные весы Defender™ 5000 в исполнении из нержавеющей стали для влажных и сложных производств. Датчик с защитой IP67, терминал IP68, библиотека на 50 000 записей и 1000 профилей.",
+    specs: [
+      { label: "Платформа", value: "Нержавеющая сталь" },
+      { label: "Датчик", value: "IP67" },
+      { label: "Терминал", value: "IP68" },
+      { label: "Память", value: "50 000 записей, 1000 профилей" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "defender-5000",
+    name: "Defender™ 5000",
+    series: "defender-5000",
+    seriesLabel: "Defender™ 5000",
+    image: `${CDN}/24247eb9-2927-464f-9727-0734732fcb3a/Defender_5000_D52_Family_AP_600x600`,
+    summary:
+      "Платформенные весы Defender™ 5000 с платформой из нержавеющей стали на окрашенной стальной раме и алюминиевым датчиком. Несколько промышленных режимов взвешивания, библиотека на 50 000 записей.",
+    specs: [
+      { label: "Платформа", value: "Нержавеющая сталь" },
+      { label: "Датчик", value: "Алюминиевый" },
+      { label: "Память", value: "50 000 записей, 1000 профилей" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "defender-3000-ss",
+    name: "Defender™ 3000, нержавеющая сталь",
+    series: "defender-3000",
+    seriesLabel: "Defender™ 3000",
+    image: `${CDN}/82502629-3663-4f1d-9be8-4756bdc8b0a0/Defender_3000_SS_600x600`,
+    summary:
+      "Платформенные весы Defender™ 3000 с платформой из нержавеющей стали 304 и корпусом датчика IP67. Терминал NEMA 4X/IP65, до 58 часов от аккумулятора, режим счёта.",
+    specs: [
+      { label: "Платформа", value: "Нерж. сталь 304" },
+      { label: "Датчик", value: "IP67" },
+      { label: "Терминал", value: "NEMA 4X / IP65" },
+      { label: "Питание", value: "до 58 ч" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "defender-3000",
+    name: "Defender™ 3000",
+    series: "defender-3000",
+    seriesLabel: "Defender™ 3000",
+    image: `${CDN}/07a00cfe-de5a-4b78-a2e6-d66e8e874486/Defender_3000_600x600_1`,
+    summary:
+      "Платформенные весы Defender™ 3000 с платформой из нержавеющей стали 304, ABS-терминалом и алюминиевым датчиком. До 100 часов от аккумулятора, режим счёта.",
+    specs: [
+      { label: "Платформа", value: "Нерж. сталь 304" },
+      { label: "Терминал", value: "ABS-пластик" },
+      { label: "Питание", value: "до 100 ч" },
+      { label: "Режимы", value: "Счёт количества" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "defender-2000-d24p",
+    name: "Defender™ 2000 (D24P)",
+    series: "defender-2000",
+    seriesLabel: "Defender™ 2000",
+    image: `${CDN}/a67e6ea2-2ce2-4343-8088-050e8f800436/Defender-2000-D24P-FL-Scale-Right-600x600`,
+    summary:
+      "Платформенные весы Defender™ 2000 (D24P) с полированной платформой из нержавеющей стали 430 и алюминиевым датчиком IP65. Красный светодиодный индикатор, питание от сети или свинцово-кислотного аккумулятора.",
+    specs: [
+      { label: "Платформа", value: "Нерж. сталь 430, полированная" },
+      { label: "Датчик", value: "IP65" },
+      { label: "Дисплей", value: "Красный LED" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "ranger-7000",
+    name: "Ranger™ 7000",
+    series: "ranger",
+    seriesLabel: "Ranger™",
+    image: `${CDN}/13f39566-f774-4242-b197-5fb0cd5cc59a/Ranger_7000_Main_600x600-1`,
+    summary:
+      "Высокопроизводительные весы Ranger™ 7000 с дискретностью до 75 000 или 350 000 делений и 10 расширенными режимами работы. Металлический корпус IP54, время установления около 1 секунды.",
+    specs: [
+      { label: "Дискретность", value: "75 000 / 350 000 делений" },
+      { label: "Режимы", value: "10 расширенных" },
+      { label: "Корпус", value: "Металл, IP54" },
+      { label: "Стабилизация", value: "≈ 1 с" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "ranger-2000",
+    name: "Ranger™ 2000",
+    series: "ranger",
+    seriesLabel: "Ranger™",
+    image: `${CDN}/049338f5-3cf6-4b8f-a974-8bffd92d41ab/Ranger_2000_Right-600x600`,
+    summary:
+      "Весы Ranger™ 2000 с разрешением 15 000 делений и платформой из нержавеющей стали. Корпус из ABS-сополимера, питание от сети или свинцово-кислотного аккумулятора, компактная настольная конструкция.",
+    specs: [
+      { label: "Разрешение", value: "15 000 делений" },
+      { label: "Платформа", value: "Нержавеющая сталь" },
+      { label: "Корпус", value: "ABS-сополимер" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "valor-7000",
+    name: "Valor™ 7000",
+    series: "valor",
+    seriesLabel: "Valor™",
+    image: `${CDN}/8a5cd761-cb98-4482-92a8-2a78dcf4425e/Valor_7000_Main_600x600`,
+    summary:
+      "Порционные весы Valor™ 7000 для пищевых производств: сертификация NSF, одобрение USDA-AMS и совместимость с HACCP. Дисплей с подсветкой, время установления менее 1 секунды.",
+    specs: [
+      { label: "Сертификация", value: "NSF, USDA-AMS, HACCP" },
+      { label: "Дисплей", value: "С подсветкой" },
+      { label: "Стабилизация", value: "< 1 с" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "valor-4000",
+    name: "Valor™ 4000",
+    series: "valor",
+    seriesLabel: "Valor™",
+    image: `${CDN}/3b9cb4e4-b5bb-4142-bd1f-aa8c5c15ba20/Valor-4000-Main-600x600-1`,
+    summary:
+      "Порционные весы Valor™ 4000 из нержавеющей стали с сертификацией NSF. Защищённая клавиатура IP68, бесконтактный датчик тарирования, время установления 0,5 секунды.",
+    specs: [
+      { label: "Сертификация", value: "NSF" },
+      { label: "Корпус", value: "Нержавеющая сталь" },
+      { label: "Клавиатура", value: "IP68, ножестойкая" },
+      { label: "Стабилизация", value: "0,5 с" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "valor-3000",
+    name: "Valor™ 3000",
+    series: "valor",
+    seriesLabel: "Valor™",
+    image: `${CDN}/8a0aa5c2-3e41-45b7-a5fc-153f4912a83a/Valor_3000_Round_600x600`,
+    summary:
+      "Порционные весы Valor™ 3000 из нержавеющей стали с сертификацией NSF. Дискретность до 40 000 делений (0,01 г), режимы процентного взвешивания и определения плотности.",
+    specs: [
+      { label: "Сертификация", value: "NSF" },
+      { label: "Корпус", value: "Нержавеющая сталь" },
+      { label: "Дискретность", value: "до 40 000 делений / 0,01 г" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "valor-2000",
+    name: "Valor™ 2000",
+    series: "valor",
+    seriesLabel: "Valor™",
+    image: `${CDN}/553dbeff-0ce7-472a-bc78-ee7ec12ad62f/Valor-2000-Main-600x600-1`,
+    summary:
+      "Порционные весы Valor™ 2000 с водонепроницаемой конструкцией Flow Thru™ (IP68) и ножестойкой поликарбонатной клавиатурой. Два светодиодных дисплея (спереди и сзади), время установления менее 0,5 секунды.",
+    specs: [
+      { label: "Сертификация", value: "NSF" },
+      { label: "Защита", value: "Flow Thru™, IP68" },
+      { label: "Дисплеи", value: "2 LED (спереди/сзади)" },
+      { label: "Стабилизация", value: "< 0,5 с" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "bench-scales"],
+    model: "valor-1000",
+    name: "Valor™ 1000",
+    series: "valor",
+    seriesLabel: "Valor™",
+    image: `${CDN}/1ab643ab-7d5f-46b5-b192-e05ae0c7813c/V12P_Right_KG_Non_US_1_600x600`,
+    summary:
+      "Компактные порционные весы Valor™ 1000 в пищевом ABS-корпусе. До 1 года (1500 часов) автономной работы, вторичный линейный дисплей, антистатическая планка и USB.",
+    specs: [
+      { label: "Корпус", value: "ABS, пищевой" },
+      { label: "Питание", value: "до 1 года / 1500 ч" },
+      { label: "Интерфейс", value: "USB" },
+    ],
+  },
+
+  // ======================= Счетные весы =======================
+  {
+    listing: ["balances-scales", "counting-scales"],
+    model: "ranger-count-2000",
+    name: "Счётные весы Ranger™ Count 2000",
+    series: "ranger-count",
+    seriesLabel: "Ranger™ Count",
+    image: `${CDN}/890284d5-df3e-46b3-930a-04c63884c529/Ranger_Count_2000_Right-600x600`,
+    summary:
+      "Счётные весы Ranger™ Count 2000 с тремя ЖК-дисплеями с подсветкой (включая центральный счётный). Память на 30 наименований, результат менее чем за секунду, функция автоподстройки для снижения ошибок счёта.",
+    specs: [
+      { label: "Дисплеи", value: "3 ЖК с подсветкой" },
+      { label: "Память", value: "30 наименований" },
+      { label: "Скорость", value: "< 1 с" },
+      { label: "Функции", value: "Автоподстройка счёта" },
+    ],
+  },
+
+  // ===================== Терминалы (индикаторы) =====================
+  {
+    listing: ["balances-scales", "indicators"],
+    model: "td52xw",
+    name: "Многофункциональный терминал TD52XW",
+    series: "td",
+    seriesLabel: "TD52",
+    image: "https://ohaus-cis.ru/getmedia/a74c931d-aa7f-4627-97e8-64794ebf6dbc/TD52XW_600x600",
+    summary:
+      "Многофункциональный терминал TD52XW с большим дисплеем с подсветкой и алфавитно-цифровой клавиатурой. Поддержка microSD и библиотеки на 50 000 записей, интерфейсы RS-232/RS-485/USB, Ethernet, Bluetooth/Wi-Fi, аналоговый выход и релейные I/O.",
+    specs: [
+      { label: "Дисплей", value: "С подсветкой, алфавитно-цифровая клавиатура" },
+      { label: "Память", value: "microSD, 50 000 записей" },
+      { label: "Интерфейсы", value: "RS-232/485, USB, Ethernet, BT/Wi-Fi" },
+      { label: "Соответствие", value: "GMP/GLP" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "indicators"],
+    model: "td52p",
+    name: "Многофункциональный терминал TD52P",
+    series: "td",
+    seriesLabel: "TD52",
+    image: "https://ohaus-cis.ru/getmedia/57033887-cda5-490e-bef8-d88b03164308/TD52P_600x600",
+    summary:
+      "Многофункциональный терминал TD52P с большим подсвеченным дисплеем и символьной клавиатурой. Память на 50 000 записей и 1000 профилей с загрузкой через SD, широкий набор интерфейсов, вывод GMP/GLP с метками времени.",
+    specs: [
+      { label: "Дисплей", value: "С подсветкой" },
+      { label: "Память", value: "50 000 записей, 1000 профилей (SD)" },
+      { label: "Интерфейсы", value: "RS-232/485, USB, Ethernet, BT/Wi-Fi" },
+      { label: "Соответствие", value: "GMP/GLP" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "indicators"],
+    model: "t51xw",
+    name: "Промышленный терминал T51XW",
+    series: "t5",
+    seriesLabel: "T51",
+    image: "https://ohaus-cis.ru/getmedia/5c4f3ca3-6bea-49f3-a1fe-6acb10faa682/T51XW_600x600",
+    summary:
+      "Промышленный многофункциональный терминал T51XW из нержавеющей стали с защитой NEMA 4X/IP66. Режимы подсчёта количества, контрольного, процентного и динамического взвешивания, откидная передняя панель для обслуживания.",
+    specs: [
+      { label: "Корпус", value: "Нержавеющая сталь, NEMA 4X/IP66" },
+      { label: "Режимы", value: "Счёт, контроль, %, динамика" },
+      { label: "Интерфейсы", value: "RS-232 (двунапр.), опц. RS-422/485, реле" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "indicators"],
+    model: "t32xw",
+    name: "Промышленный терминал T32XW",
+    series: "t3",
+    seriesLabel: "T32",
+    image: "https://ohaus-cis.ru/getmedia/935fd2ee-d9de-4056-bfb2-d154840fa98c/T32XW_Indicator_with_Bracket_kg_Right-600x600-1",
+    summary:
+      "Экономичный промышленный терминал T32XW из нержавеющей стали с влагозащитой NEMA 4X/IP65. Встроенный аккумулятор на 58 часов работы, режим счёта, откидная передняя панель.",
+    specs: [
+      { label: "Корпус", value: "Нержавеющая сталь, NEMA 4X/IP65" },
+      { label: "Питание", value: "до 58 ч" },
+      { label: "Режимы", value: "Счёт количества" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "indicators"],
+    model: "t31p",
+    name: "Базовый терминал T31P",
+    series: "t3",
+    seriesLabel: "T31",
+    image: "https://ohaus-cis.ru/getmedia/37c509af-ef7a-4f5c-9a62-05bf5f95f001/T31P_Right_600x600",
+    summary:
+      "Экономичный базовый терминал T31P в ABS-корпусе с сертификацией для коммерческого учёта (OIML, NTEP, Measurement Canada). Встроенный аккумулятор до 100 часов, поворотная задняя крышка для прокладки кабеля.",
+    specs: [
+      { label: "Корпус", value: "ABS-пластик" },
+      { label: "Сертификация", value: "OIML, NTEP, Measurement Canada" },
+      { label: "Питание", value: "до 100 ч" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "indicators"],
+    model: "t24p",
+    name: "Экономичный терминал T24P",
+    series: "t2",
+    seriesLabel: "T24",
+    image: "https://ohaus-cis.ru/getmedia/0bb54fe8-3a13-4c9d-b13d-dab73b354800/T24PE_Indicator_Right-600x600",
+    summary:
+      "Прочный экономичный терминал T24P с красным светодиодным дисплеем для слабого освещения. Стандартное взвешивание, подсчёт количества и суммирование, питание от сети или свинцово-кислотного аккумулятора.",
+    specs: [
+      { label: "Дисплей", value: "Красный LED" },
+      { label: "Режимы", value: "Взвешивание, счёт, суммирование" },
+      { label: "Питание", value: "Сеть / аккумулятор" },
+    ],
+  },
+
+  // ======================= Ювелирные весы =======================
+  {
+    listing: ["balances-scales", "jewelry-scales"],
+    model: "scout-sjx",
+    name: "Ювелирные весы Scout™ SJX",
+    series: "scout",
+    seriesLabel: "Scout™",
+    image: `${CDN}/789e63da-0ba6-4d6f-b448-d87f35785602/SJX_Round_600x600`,
+    summary:
+      "Портативные ювелирные весы Scout™ SJX класса точности II, сертифицированные для коммерческого учёта. Ручная внутренняя калибровка, несколько вариантов подключения и поддержка вспомогательного дисплея.",
+    specs: [
+      { label: "Класс точности", value: "II (для торговли)" },
+      { label: "Калибровка", value: "Ручная внутренняя" },
+      { label: "Назначение", value: "Взвешивание ювелирных изделий" },
+      { label: "Подключение", value: "Несколько вариантов, доп. дисплей" },
+    ],
+  },
 ];
