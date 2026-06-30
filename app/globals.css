@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* OHAUS brand tokens (snapped from ru.ohaus.com) */
+    --ohaus-red: #dc0032;
+    --ohaus-red-dark: #b0002a;
+    --ohaus-ink: #1a1a1a;
+    --ohaus-gray-dark: #333333;
+    --ohaus-muted: #6b7280;
+    --ohaus-line: #e5e7eb;
+    --ohaus-bg: #ffffff;
+    --ohaus-bg-soft: #f5f6f8;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--ohaus-bg);
+    color: var(--ohaus-ink);
+    font-family: var(--font-open-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-roboto), system-ui, sans-serif;
+    color: var(--ohaus-ink);
+  }
+
+  /* Visible keyboard focus for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--ohaus-red);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-8;
+  }
+}
