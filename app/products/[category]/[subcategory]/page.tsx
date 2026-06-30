@@ -1,28 +1,24 @@
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Breadcrumbs from "@/components/layout/Breadcrumbs";
-import ProductCard from "@/components/ui/ProductCard";
-import {
-  catalogRouteParams,
-  isKnownSubcategory,
-  labelForSegment,
-} from "@/lib/catalog";
+import CatalogView from "@/components/catalog/CatalogView";
+import { catalogRouteParams, labelForSegment } from "@/lib/catalog";
+import { findProductByPath, productParamsByDepth } from "@/lib/products";
 
-type Params = { category: string; subcategory: string };
+export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return catalogRouteParams().subcategories;
+  return [...catalogRouteParams().subcategories, ...productParamsByDepth(2)];
 }
+
+type Params = { category: string; subcategory: string };
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { subcategory } = await params;
-  return { title: labelForSegment(subcategory) };
+  const { category, subcategory } = await params;
+  const product = findProductByPath([category, subcategory]);
+  return { title: product?.name ?? labelForSegment(subcategory) };
 }
 
 export default async function SubcategoryPage({
@@ -31,30 +27,5 @@ export default async function SubcategoryPage({
   params: Promise<Params>;
 }) {
   const { category, subcategory } = await params;
-  if (!isKnownSubcategory(category, subcategory)) notFound();
-
-  const categoryTitle = labelForSegment(category);
-  const title = labelForSegment(subcategory);
-
-  return (
-    <Container>
-      <Breadcrumbs
-        items={[
-          { title: "Продукты", href: "/products" },
-          { title: categoryTitle, href: `/products/${category}` },
-          { title },
-        ]}
-      />
-      <SectionHeading
-        as="h1"
-        title={title}
-        subtitle="Подкатегория каталога. Список моделей — на следующем этапе."
-      />
-      <div className="grid grid-cols-2 gap-4 pb-12 sm:grid-cols-3 lg:grid-cols-4 lg:gap-6">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <ProductCard key={i} />
-        ))}
-      </div>
-    </Container>
-  );
+  return <CatalogView segments={[category, subcategory]} />;
 }

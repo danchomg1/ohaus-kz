@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ImageIcon } from "lucide-react";
+import Image from "next/image";
 import Skeleton from "./Skeleton";
 
 type ProductCardProps = {
@@ -10,8 +10,8 @@ type ProductCardProps = {
 };
 
 /**
- * Product card. Stage 1: renders a skeleton placeholder by default.
- * Props are wired for future real content.
+ * Product card. With `name` it renders real content (image + series + name);
+ * without it, a skeleton placeholder.
  */
 export default function ProductCard({
   name,
@@ -22,15 +22,21 @@ export default function ProductCard({
   const isSkeleton = !name;
 
   const content = (
-    <div className="flex flex-col border border-ohaus-line bg-white transition-shadow hover:shadow-card">
-      <div className="flex aspect-square items-center justify-center bg-ohaus-bg-soft">
+    <div className="flex h-full flex-col border border-ohaus-line bg-white transition-shadow group-hover:shadow-card">
+      <div className="relative flex aspect-square items-center justify-center bg-white p-4">
         {image ? (
-          <ImageIcon className="h-10 w-10 text-ohaus-line" aria-hidden="true" />
+          <Image
+            src={image}
+            alt={name ?? ""}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-contain p-4"
+          />
         ) : (
           <Skeleton className="h-2/3 w-2/3" />
         )}
       </div>
-      <div className="space-y-2 p-4">
+      <div className="space-y-2 border-t border-ohaus-line p-4">
         {isSkeleton ? (
           <>
             <Skeleton className="h-3 w-1/3" />
@@ -45,7 +51,7 @@ export default function ProductCard({
                 {series}
               </span>
             ) : null}
-            <p className="font-heading text-sm font-bold text-ohaus-ink">
+            <p className="font-heading text-sm font-bold text-ohaus-ink group-hover:text-ohaus-red">
               {name}
             </p>
           </>
@@ -56,13 +62,15 @@ export default function ProductCard({
 
   if (href && !isSkeleton) {
     return (
-      <Link href={href} className="group block">
+      <Link href={href} className="group block h-full">
         {content}
       </Link>
     );
   }
 
   return (
-    <div aria-hidden={isSkeleton ? "true" : undefined}>{content}</div>
+    <div className="group" aria-hidden={isSkeleton ? "true" : undefined}>
+      {content}
+    </div>
   );
 }

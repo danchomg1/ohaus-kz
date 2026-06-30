@@ -313,13 +313,61 @@ export function isKnownSubcategory(
   );
 }
 
+/** RU labels for top-level category path segments (not titled in the catalog). */
+const CATEGORY_LABELS: Record<string, string> = {
+  "balances-scales": "Весы и весовое оборудование",
+  equipment: "Лабораторное оборудование",
+  "instruments-equipment": "Контрольно-измерительные приборы",
+  weights: "Гири",
+  "portable-scales-2": "Портативные весы",
+};
+
 /** Pretty label for a raw route slug (de-kebab) with a catalog title fallback. */
 export function labelForSegment(slug: string): string {
   const known = titleForSlug(slug);
   if (known) return known;
+  if (CATEGORY_LABELS[slug]) return CATEGORY_LABELS[slug];
   const decoded = decodeURIComponent(slug);
   return decoded
     .split("-")
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
+}
+
+/** True if any catalog link path starts with the given segments (valid node). */
+export function isKnownPathPrefix(segments: string[]): boolean {
+  if (segments.length === 0) return true;
+  return allLinks().some((link) => {
+    const seg = productPathSegments(link.slug);
+    return (
+      seg.length >= segments.length &&
+      segments.every((s, i) => s === seg[i])
+    );
+  });
+}
+
+/** Immediate child catalog nodes one level below the given path. */
+export function childCatalogLinks(
+  segments: string[],
+): { title: string; href: string }[] {
+  const seen = new Set<string>();
+  const out: { title: string; href: string }[] = [];
+  for (const link of allLinks()) {
+    const seg = productPathSegments(link.slug);
+    const isUnder =
+      seg.length > segments.length &&
+      segments.every((s, i) => s === seg[i]);
+    if (!isUnder) continue;
+    const childSegments = seg.slice(0, segments.length + 1);
+    const key = childSegments.join("/");
+    if (seen.has(key)) continue;
+    seen.add(key);
+    // If the child is the link's own leaf, use its catalog title.
+    const title =
+      childSegments.length === seg.length
+        ? link.title
+        : labelForSegment(childSegments[childSegments.length - 1]);
+    out.push({ title, href: `/products/${key}` });
+  }
+  return out;
 }
