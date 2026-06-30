@@ -725,4 +725,332 @@ export const products: Product[] = [
       { label: "Применение", value: "Учебные лаборатории" },
     ],
   },
+
+  // ============== Контрольно-измерительные приборы ==============
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-5000-ph",
+    name: "Стационарный pH-метр Starter 5000",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/08bfcd03-6244-4d4c-8b28-cd83fc44520e/Starter_5000_PH_Bench_600x600`,
+    summary:
+      "Стационарный лабораторный pH-метр Starter 5000 с цветным сенсорным дисплеем и классом защиты IP54. Память на 1000 записей и хранение данных калибровки до 10 датчиков.",
+    specs: [
+      { label: "Параметр", value: "pH" },
+      { label: "Дисплей", value: "Цветной сенсорный" },
+      { label: "Память", value: "1000 записей" },
+      { label: "Защита", value: "IP54" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "ab41ph",
+    name: "Стационарный pH-метр AQUASEARCHER™ AB41PH",
+    series: "aquasearcher",
+    seriesLabel: "AQUASEARCHER™",
+    image: `${CDN}/1efaab38-7ca2-4087-a7be-446b1c403dba/AB41PH_Front_4`,
+    summary:
+      "Стационарный pH-метр AQUASEARCHER™ AB41PH с дискретностью pH от 0,1 до 0,001 и ЖК-дисплеем 6,5″. Память на 1000 ячеек, интерфейсы RS-232 и USB, функции GLP с управлением паролями.",
+    specs: [
+      { label: "Параметр", value: "pH (0,1–0,001)" },
+      { label: "Дисплей", value: 'ЖК 6,5"' },
+      { label: "Память", value: "1000 ячеек" },
+      { label: "Интерфейсы", value: "RS-232, USB" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "ab33m1",
+    name: "Многопараметрический прибор AQUASEARCHER™ AB33M1",
+    series: "aquasearcher",
+    seriesLabel: "AQUASEARCHER™",
+    image: `${CDN}/909262e4-a4d2-4a28-b03c-355bab31fb92/AB33M1_Holder_Electrode_Beaker_1`,
+    summary:
+      "Настольный многопараметрический прибор AQUASEARCHER™ AB33M1: измерение 7 параметров (pH, ОВП, УЭП, TDS, солёность, удельное сопротивление, температура) по двум независимым каналам.",
+    specs: [
+      { label: "Параметры", value: "7 (pH, ОВП, УЭП, TDS и др.)" },
+      { label: "Каналы", value: "2 независимых" },
+      { label: "Память", value: "1000 результатов" },
+      { label: "Интерфейсы", value: "RS-232, USB" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "ab33ph",
+    name: "Стационарный pH-метр AQUASEARCHER™ AB33PH",
+    series: "aquasearcher",
+    seriesLabel: "AQUASEARCHER™",
+    image: `${CDN}/ec95a1c0-8ce1-4c3b-ac01-0063b4b95cd5/AB33PH_Holder_Electrode_Beaker_1`,
+    summary:
+      "Стационарный pH-метр AQUASEARCHER™ AB33PH с ЖК-дисплеем 6,5″ и автоматическим определением конечной точки. Память на 1000 результатов, интерфейсы RS-232 и USB.",
+    specs: [
+      { label: "Параметр", value: "pH" },
+      { label: "Дисплей", value: 'ЖК 6,5"' },
+      { label: "Память", value: "1000 результатов" },
+      { label: "Интерфейсы", value: "RS-232, USB" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "ab33ec",
+    name: "Стационарный кондуктометр AQUASEARCHER™ AB33EC",
+    series: "aquasearcher",
+    seriesLabel: "AQUASEARCHER™",
+    image: `${CDN}/d3251d86-aa5a-484b-ae7b-db455c388a7e/AB33EC_Holder_Electrode_Beaker_1`,
+    summary:
+      "Стационарный кондуктометр AQUASEARCHER™ AB33EC: УЭП, TDS, солёность и удельное сопротивление. Опорная температура 20 или 25 °C, автоматическая температурная компенсация, поддержка 2- и 4-электродных датчиков.",
+    specs: [
+      { label: "Параметры", value: "УЭП, TDS, солёность" },
+      { label: "Опорная t°", value: "20 / 25 °C" },
+      { label: "Компенсация", value: "Автоматическая" },
+      { label: "Интерфейсы", value: "RS-232, USB" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "ab23ph",
+    name: "Стационарный pH-метр AQUASEARCHER™ AB23PH",
+    series: "aquasearcher",
+    seriesLabel: "AQUASEARCHER™",
+    image: `${CDN}/e113834a-e3f0-4656-8fbc-7989c4910806/AB23PH_Holder_Electrode_Beaker_1`,
+    summary:
+      "Стационарный pH-метр AQUASEARCHER™ AB23PH с автоматическим распознаванием буферных растворов и ярким подсвеченным ЖК-дисплеем. Компактный держатель электрода, интуитивный интерфейс.",
+    specs: [
+      { label: "Параметры", value: "pH, ОВП" },
+      { label: "Буферы", value: "Автораспознавание" },
+      { label: "Дисплей", value: "ЖК с подсветкой" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "ab23ec",
+    name: "Стационарный кондуктометр AQUASEARCHER™ AB23EC",
+    series: "aquasearcher",
+    seriesLabel: "AQUASEARCHER™",
+    image: `${CDN}/0b0ebdb6-2703-4ba4-82f1-2b4547490100/AB23EC_Holder_Electrode_Beaker_Insert_1`,
+    summary:
+      "Стационарный кондуктометр AQUASEARCHER™ AB23EC с ЖК-дисплеем 5″ и пошаговыми инструкциями. Измерение УЭП, TDS и солёности, автоматическая температурная компенсация.",
+    specs: [
+      { label: "Параметры", value: "УЭП, TDS, солёность" },
+      { label: "Дисплей", value: 'ЖК 5"' },
+      { label: "Компенсация", value: "Автоматическая" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-400m",
+    name: "Портативный многопараметрический прибор Starter 400M",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/5ca5e38d-cd5a-4dce-bb16-b40044690fdb/water-analysis-Starter-400M`,
+    summary:
+      "Портативный многопараметрический прибор Starter 400M с классом защиты IP67 и литиевым аккумулятором на 40 часов работы. Защитный резиновый чехол, ЖК-дисплей.",
+    specs: [
+      { label: "Тип", value: "Многопараметрический, портативный" },
+      { label: "Защита", value: "IP67" },
+      { label: "Питание", value: "Li-аккумулятор, до 40 ч" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-400",
+    name: "Портативный pH-метр Starter 400",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/ae81c380-dba9-4d10-9691-cfcc0052f213/water-analysis-Starter-400`,
+    summary:
+      "Портативный pH-метр Starter 400 с классом защиты IP67 и аккумулятором на 40 часов. Защитный резиновый чехол и яркий подсвеченный ЖК-дисплей.",
+    specs: [
+      { label: "Параметр", value: "pH" },
+      { label: "Защита", value: "IP67" },
+      { label: "Питание", value: "до 40 ч" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-400d",
+    name: "Портативный кислородомер Starter 400D",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/29c7c916-3fa8-4042-97e7-44e5421b7d28/ST400D_1_600x600`,
+    summary:
+      "Портативный кислородомер Starter 400D с оптическим датчиком растворённого кислорода и классом защиты IP54. Минимальное обслуживание, подсвеченный ЖК-дисплей, подставка и наручный ремень.",
+    specs: [
+      { label: "Параметр", value: "Растворённый кислород" },
+      { label: "Датчик", value: "Оптический" },
+      { label: "Защита", value: "IP54" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-300",
+    name: "Портативный pH-метр Starter 300",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/575b288a-8bdb-41cc-8598-597589270429/ST300ph_1_600x600`,
+    summary:
+      "Портативный pH-метр Starter 300 с автоматическим распознаванием буферных растворов и классом защиты IP54. Журнал на 30 записей, автоматическая температурная компенсация.",
+    specs: [
+      { label: "Параметр", value: "pH" },
+      { label: "Защита", value: "IP54" },
+      { label: "Журнал", value: "30 записей" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-300c",
+    name: "Портативный кондуктометр Starter 300C",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/dc887aba-5d37-46b1-a515-f452dd628a23/ST300C_600x600`,
+    summary:
+      "Портативный кондуктометр Starter 300C с четырёхполюсным электродом и встроенным датчиком температуры. Журнал на 30 записей, автоматическая температурная компенсация.",
+    specs: [
+      { label: "Параметр", value: "УЭП" },
+      { label: "Электрод", value: "Четырёхполюсный" },
+      { label: "Журнал", value: "30 записей" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-pen",
+    name: "Карманные приборы Starter Pen",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/df7cfe72-d195-4db3-b28f-8e07aa5b6597/Starter_Pen_AMain_600x600`,
+    summary:
+      "Карманные приборы Starter Pen в компактном корпусе с классом защиты IP67. Защитный колпачок датчика, автоотключение и наручный ремешок.",
+    specs: [
+      { label: "Тип", value: "Карманный" },
+      { label: "Защита", value: "IP67" },
+      { label: "Функции", value: "Автоотключение" },
+    ],
+  },
+  {
+    listing: ["instruments-equipment", "water-analysis"],
+    model: "starter-electrodes",
+    name: "Электроды Starter",
+    series: "starter",
+    seriesLabel: "Starter",
+    image: `${CDN}/8ba8fc21-01dd-45a5-ad00-0d695640da62/Starter_Electrodes_600x600`,
+    summary:
+      "Электроды Starter в пластмассовом или стеклянном корпусе со встроенным датчиком температуры и автоматической температурной компенсацией. Совместимы со всеми приборами OHAUS.",
+    specs: [
+      { label: "Корпус", value: "Пластик / стекло" },
+      { label: "Датчик t°", value: "Встроенный" },
+      { label: "Совместимость", value: "Все приборы OHAUS" },
+    ],
+  },
+
+  // ================ Анализаторы влагосодержания ================
+  {
+    listing: ["balances-scales", "moisture-analyzers"],
+    model: "mb120",
+    name: "Анализатор влагосодержания MB120",
+    series: "mb",
+    seriesLabel: "MB120",
+    image: `${CDN}/67f42646-e22e-4ed2-834c-72d90669410a/MB120_Smartguide_Right_1_600x600`,
+    summary:
+      "Анализатор влагосодержания MB120 с галогенным нагревом и функцией SmartGuide™ для автоматизированного анализа. Память на 100 методов и 1000 результатов, экспорт данных и перенос методов.",
+    specs: [
+      { label: "Нагрев", value: "Галогенный" },
+      { label: "Память", value: "100 методов, 1000 результатов" },
+      { label: "Программы сушки", value: "4 предустановленных" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "moisture-analyzers"],
+    model: "mb90",
+    name: "Анализатор влагосодержания MB90",
+    series: "mb",
+    seriesLabel: "MB90",
+    image: `${CDN}/48d13ed9-1618-414f-8f45-c2e095095d96/MB90_Closed_600x600`,
+    summary:
+      "Анализатор влагосодержания MB90 с галогенным нагревательным элементом для ускоренного получения результатов. Сенсорное меню с пошаговыми подсказками и обслуживание без инструментов.",
+    specs: [
+      { label: "Нагрев", value: "Галогенный" },
+      { label: "Меню", value: "Сенсорное, с подсказками" },
+      { label: "Обслуживание", value: "Без инструментов" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "moisture-analyzers"],
+    model: "mb27",
+    name: "Анализатор влагосодержания MB27",
+    series: "mb",
+    seriesLabel: "MB27",
+    image: `${CDN}/9f4635ba-ca2e-45be-9d37-d8acfc04dd75/MB27_Closed_600x600`,
+    summary:
+      "Анализатор влагосодержания MB27 с галогенным нагревом и точностью ±0,01% при дискретности 0,001 г. Двойная калибровка (по массе и температуре), сенсорное управление.",
+    specs: [
+      { label: "Точность", value: "±0,01% при 0,001 г" },
+      { label: "Нагрев", value: "Галогенный" },
+      { label: "Калибровка", value: "По массе и температуре" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "moisture-analyzers"],
+    model: "mb25",
+    name: "Анализатор влагосодержания MB25",
+    series: "mb",
+    seriesLabel: "MB25",
+    image: `${CDN}/6a228ad5-af6d-4dac-935f-3bdf1362c4e1/MB25_ARight-600x600`,
+    summary:
+      "Анализатор влагосодержания MB25 с галогенным нагревом и ЖК-дисплеем с подсветкой. Управление одной кнопкой и компактная конструкция для экономии места.",
+    specs: [
+      { label: "Нагрев", value: "Галогенный" },
+      { label: "Дисплей", value: "ЖК с подсветкой" },
+      { label: "Управление", value: "Одна кнопка" },
+    ],
+  },
+  {
+    listing: ["balances-scales", "moisture-analyzers"],
+    model: "mb23",
+    name: "Анализатор влагосодержания MB23",
+    series: "mb",
+    seriesLabel: "MB23",
+    image: `${CDN}/764a599d-6b11-448b-8383-8aba1f7526c6/MB23_Closed_600x600`,
+    summary:
+      "Анализатор влагосодержания MB23 с инфракрасным нагревательным элементом в металлическом исполнении (без стекла) и ЖК-дисплеем с подсветкой. Настройка одной кнопкой, компактный корпус.",
+    specs: [
+      { label: "Нагрев", value: "Инфракрасный (металл)" },
+      { label: "Дисплей", value: "ЖК с подсветкой" },
+      { label: "Управление", value: "Одна кнопка" },
+    ],
+  },
+
+  // ========================== Гири ==========================
+  {
+    listing: ["weights", "calibration-weights"],
+    model: "oiml-individual",
+    name: "Калибровочные гири OIML (поштучно)",
+    series: "oiml",
+    seriesLabel: "OIML",
+    image: `${CDN}/e0d5bd37-d304-4a97-b69a-4afbad1e9a64/OIML-Individual-Weight-500mg_1`,
+    summary:
+      "Отдельные калибровочные гири OIML классов E1, E2, F1, F2 из высококачественной нержавеющей стали (включая Troemner Alloy 8). Полированная поверхность по OIML R 111, сертификат ISO/IEC 17025 с прослеживаемостью к NIST.",
+    specs: [
+      { label: "Класс", value: "OIML E1, E2, F1, F2" },
+      { label: "Материал", value: "Нержавеющая сталь (Alloy 8)" },
+      { label: "Стандарт", value: "OIML R 111" },
+      { label: "Сертификат", value: "ISO/IEC 17025, NIST" },
+    ],
+  },
+  {
+    listing: ["weights", "calibration-weights"],
+    model: "oiml-sets",
+    name: "Наборы калибровочных гирь OIML",
+    series: "oiml",
+    seriesLabel: "OIML",
+    image: `${CDN}/c60f4851-8dc2-47f1-9963-fa7c348a2362/OIML-Weight-Set-500mg-1mg_1`,
+    summary:
+      "Наборы калибровочных гирь OIML классов E1, E2, F1, F2 из нержавеющей стали с крайне низкой магнитной восприимчивостью. Сертификат ISO/IEC 17025 с прослеживаемостью к NIST.",
+    specs: [
+      { label: "Класс", value: "OIML E1, E2, F1, F2" },
+      { label: "Материал", value: "Нержавеющая сталь" },
+      { label: "Магнитная восприимчивость", value: "Крайне низкая" },
+      { label: "Сертификат", value: "ISO/IEC 17025, NIST" },
+    ],
+  },
 ];
