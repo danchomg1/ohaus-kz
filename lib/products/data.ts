@@ -265,4 +265,464 @@ export const products: Product[] = [
       { label: "Конструкция", value: "Тонкая, штабелируемая" },
     ],
   },
+
+  // ======================= Оборудование =======================
+
+  // --- Центрифуги ---
+  {
+    listing: ["equipment", "centrifuges"],
+    model: "frontier-5000-multi-pro",
+    name: "Центрифуга Frontier™ 5000 Multi Pro",
+    series: "frontier-5000",
+    seriesLabel: "Frontier™ 5000",
+    image: `${CDN}/fd00041f-ab81-4414-8158-18d2936ea82c/Multi-Pro-5718R-Centrifuges-Main_blue_screen`,
+    summary:
+      "Высокоскоростная универсальная лабораторная центрифуга Frontier™ 5000 Multi Pro. Автоматическое распознавание ротора, ЖК-дисплей с подсветкой, корпус из нержавеющей стали и широкая совместимость с роторами.",
+    specs: [
+      { label: "Тип", value: "Универсальная, высокоскоростная" },
+      { label: "Распознавание ротора", value: "Автоматическое" },
+      { label: "Дисплей", value: "ЖК с подсветкой" },
+      { label: "Корпус", value: "Нержавеющая сталь" },
+    ],
+  },
+  {
+    listing: ["equipment", "centrifuges"],
+    model: "frontier-5000-multi",
+    name: "Центрифуга Frontier™ 5000 Multi",
+    series: "frontier-5000",
+    seriesLabel: "Frontier™ 5000",
+    image: `${CDN}/4d741418-4dae-4075-af4a-d9de7488fb5d/Frontier5000Multi1`,
+    summary:
+      "Компактная многофункциональная центрифуга Frontier™ 5000 Multi для общелабораторных задач. Совместима со стандартными пробирками 50 и 15 мл, с дополнительным оснащением — до 1,5 мл.",
+    specs: [
+      { label: "Тип", value: "Многофункциональная" },
+      { label: "Пробирки", value: "50 мл, 15 мл (до 1,5 мл с адаптерами)" },
+      { label: "Конструкция", value: "Настольная, компактная" },
+    ],
+  },
+  {
+    listing: ["equipment", "centrifuges"],
+    model: "frontier-5000-micro",
+    name: "Микроцентрифуга Frontier™ 5000 Micro",
+    series: "frontier-5000",
+    seriesLabel: "Frontier™ 5000",
+    image: `${CDN}/14dc6ed8-2fbe-4665-8c9f-16a838266294/Micro-5515R-Centrifuges-Main_blue_screen`,
+    summary:
+      "Высокоскоростная микроцентрифуга Frontier™ 5000 Micro для малых объёмов. Совместима с пробирками 1,5/2 и 5 мл, ПЦР-стриптами, криопробирками и капиллярами.",
+    specs: [
+      { label: "Тип", value: "Микроцентрифуга, высокоскоростная" },
+      { label: "Пробирки", value: "1,5 / 2 / 5 мл, ПЦР-стрипы, капилляры" },
+      { label: "Интерфейс", value: "Удобен при работе в перчатках" },
+    ],
+  },
+  {
+    listing: ["equipment", "centrifuges"],
+    model: "frontier-5000-mini",
+    name: "Мини-центрифуга Frontier™ 5000 Mini",
+    series: "frontier-5000",
+    seriesLabel: "Frontier™ 5000",
+    image: `${CDN}/6031bc3a-7195-4b26-8d71-e9f1f139f1bd/Frontier_5000_Series_Mini_AMain_600x600`,
+    summary:
+      "Компактная мини-центрифуга Frontier™ 5000 Mini с бесщёточным двигателем. Автостарт при закрытии крышки, датчик дисбаланса ротора и двойные защитные переключатели, низкий уровень шума.",
+    specs: [
+      { label: "Двигатель", value: "Бесщёточный, низковольтный" },
+      { label: "Запуск", value: "Автоматический при закрытии крышки" },
+      { label: "Безопасность", value: "Датчик дисбаланса, двойная защита" },
+    ],
+  },
+  {
+    listing: ["equipment", "centrifuges"],
+    model: "frontier-rotors-5000",
+    name: "Роторы Frontier™ 5000",
+    series: "frontier-5000",
+    seriesLabel: "Frontier™ 5000",
+    image: `${CDN}/cfc758d5-e981-45dc-a71c-1972a50350d5/Frontier_Rotors_1_600x600`,
+    summary:
+      "Роторы и аксессуары для центрифуг Frontier™ 5000 из алюминиевого сплава или полипропилена. Простая установка и извлечение проб, совместимость с автоклавированием.",
+    specs: [
+      { label: "Материал", value: "Алюминиевый сплав / полипропилен" },
+      { label: "Стерилизация", value: "Автоклавирование" },
+      { label: "Варианты", value: "Под разные объёмы проб" },
+    ],
+  },
+
+  // --- Открытые шейкеры ---
+  {
+    listing: ["equipment", "open-air-shakers"],
+    model: "heavy-duty-orbital",
+    name: "Орбитальные шейкеры тяжелого типа",
+    series: "open-air",
+    seriesLabel: "Открытые шейкеры",
+    image: `${CDN}/1d6d03d1-6de1-49c2-b854-cb8c542cb805/Heavy-Duty-Orbital-Shakers-Main`,
+    summary:
+      "Орбитальные шейкеры тяжелого типа с цифровым управлением скоростью Accu-Drive. Различные варианты грузоподъёмности, безобслуживаемый двигатель и более 70 аксессуаров.",
+    specs: [
+      { label: "Движение", value: "Орбитальное" },
+      { label: "Управление", value: "Цифровое (Accu-Drive)" },
+      { label: "Двигатель", value: "Безобслуживаемый" },
+      { label: "Аксессуары", value: "70+ вариантов" },
+    ],
+  },
+  {
+    listing: ["equipment", "open-air-shakers"],
+    model: "extreme-environment",
+    name: "Шейкеры для экстремальных условий",
+    series: "open-air",
+    seriesLabel: "Открытые шейкеры",
+    image: `${CDN}/89001ee7-5083-4897-a1b5-b0f3d7d2d66c/Extreme_Environment_Shakers_AMain_600x600`,
+    summary:
+      "Шейкеры для эксплуатации в экстремальных условиях, работающие при влажности до 100%. Высокая грузоподъёмность, трёхэксцентриковый привод и прецизионное управление Accu-Drive.",
+    specs: [
+      { label: "Условия", value: "Влажность до 100%" },
+      { label: "Привод", value: "Трёхэксцентриковый" },
+      { label: "Управление", value: "Accu-Drive" },
+      { label: "Аксессуары", value: "50+ вариантов" },
+    ],
+  },
+  {
+    listing: ["equipment", "open-air-shakers"],
+    model: "light-duty-orbital",
+    name: "Орбитальные шейкеры легкого типа",
+    series: "open-air",
+    seriesLabel: "Открытые шейкеры",
+    image: `${CDN}/0e331c26-278e-4033-8ee7-870dd8bacbdd/Light_Duty_Orbital_Shakers_AMain_600x600`,
+    summary:
+      "Орбитальные шейкеры легкого типа с аналоговым управлением и плавным ходом. Готовый к работе поддон с резиновым ковриком, мягкий разгон и 20 аксессуаров; есть версия для микропланшетов.",
+    specs: [
+      { label: "Движение", value: "Орбитальное" },
+      { label: "Управление", value: "Аналоговое" },
+      { label: "Разгон", value: "Плавный" },
+      { label: "Аксессуары", value: "20 вариантов" },
+    ],
+  },
+  {
+    listing: ["equipment", "open-air-shakers"],
+    model: "rocking-waving",
+    name: "Шейкеры-качалки и волновые шейкеры",
+    series: "open-air",
+    seriesLabel: "Открытые шейкеры",
+    image: `${CDN}/fd26a2ee-16cc-4e0e-a971-b05a58160293/Rocking_And_Waving_AMain_600x600`,
+    summary:
+      "Шейкеры-качалки и волновые шейкеры с электронной регулировкой угла наклона (шаг 1°) и скорости (шаг 1 об/мин). Сенсорная панель управления и плавный разгон.",
+    specs: [
+      { label: "Угол наклона", value: "Электронный, шаг 1°" },
+      { label: "Скорость", value: "Шаг 1 об/мин" },
+      { label: "Управление", value: "Сенсорная панель" },
+    ],
+  },
+  {
+    listing: ["equipment", "open-air-shakers"],
+    model: "reciprocating",
+    name: "Возвратно-поступательные шейкеры",
+    series: "open-air",
+    seriesLabel: "Открытые шейкеры",
+    image: `${CDN}/3595e502-c02a-460b-9e4e-e577cb34fc25/High_Speed_Microplate_Shaker_Right`,
+    summary:
+      "Возвратно-поступательные шейкеры с плавным разгоном и определением нагрузки. Широкая совместимость с аксессуарами и регулируемая интенсивность перемешивания.",
+    specs: [
+      { label: "Движение", value: "Возвратно-поступательное" },
+      { label: "Разгон", value: "Плавный" },
+      { label: "Определение нагрузки", value: "Есть" },
+    ],
+  },
+  {
+    listing: ["equipment", "open-air-shakers"],
+    model: "high-speed-microplate",
+    name: "Высокоскоростные шейкеры для микропланшетов",
+    series: "open-air",
+    seriesLabel: "Открытые шейкеры",
+    image: `${CDN}/3595e502-c02a-460b-9e4e-e577cb34fc25/High_Speed_Microplate_Shaker_Right`,
+    summary:
+      "Высокоскоростные шейкеры для микропланшетов вместимостью до 48 планшетов. Интервальный режим, сенсорное управление со светодиодной индикацией.",
+    specs: [
+      { label: "Вместимость", value: "до 48 микропланшетов" },
+      { label: "Макс. нагрузка", value: "3,2 кг" },
+      { label: "Интервальный режим", value: "1–59 с" },
+      { label: "Управление", value: "Сенсорное, LED-индикация" },
+    ],
+  },
+
+  // --- Шейкеры-инкубаторы ---
+  {
+    listing: ["equipment", "incubating-incubating-cooling-shakers"],
+    model: "incubating-cooling-thermal",
+    name: "Шейкеры-инкубаторы с охлаждением и термошейкеры",
+    series: "incubating",
+    seriesLabel: "Шейкеры-инкубаторы",
+    image: `${CDN}/42e1db6d-3396-462b-8bec-b5956ce231f3/Incubating_Cooling_Thermal_AMain_600x600`,
+    summary:
+      "Шейкеры-инкубаторы с охлаждением и термошейкеры с нагревом и охлаждением (до 17 °C ниже окружающей). Сенсорный дисплей с поддержкой 6 языков, память на 5 программ, USB-порт.",
+    specs: [
+      { label: "Температура", value: "до −17 °C от окружающей" },
+      { label: "Дисплей", value: "Сенсорный, 6 языков" },
+      { label: "Память", value: "5 программ по 5 этапов" },
+      { label: "Интерфейс", value: "USB" },
+    ],
+  },
+  {
+    listing: ["equipment", "incubating-incubating-cooling-shakers"],
+    model: "incubating-cooling-orbital",
+    name: "Орбитальные шейкеры-инкубаторы с охлаждением",
+    series: "incubating",
+    seriesLabel: "Шейкеры-инкубаторы",
+    image: `${CDN}/86f69146-1820-4b64-9b17-11fcdd6823f0/Incubating_Cooling_Orbital_AMain_600x600`,
+    summary:
+      "Орбитальные шейкеры-инкубаторы с охлаждением и прямым контактным управлением температурой на элементах Пельтье. Совместимость с микропланшетами без аксессуаров, функция калибровки температуры.",
+    specs: [
+      { label: "Температура", value: "Элементы Пельтье, прямой контакт" },
+      { label: "Совместимость", value: "Микропланшеты без аксессуаров" },
+      { label: "Калибровка", value: "Температуры" },
+    ],
+  },
+  {
+    listing: ["equipment", "incubating-incubating-cooling-shakers"],
+    model: "incubating-light-duty-orbital",
+    name: "Орбитальные шейкеры-инкубаторы легкого типа",
+    series: "incubating",
+    seriesLabel: "Шейкеры-инкубаторы",
+    image: `${CDN}/d7708c3a-c6be-4bec-84d1-d71574683375/Incubating_Light_Duty_Orbital_AMain_600x600`,
+    summary:
+      "Орбитальные шейкеры-инкубаторы легкого типа с максимальной нагрузкой 4 кг. Вмещают 4 микропланшета или глубоколуночных планшета, два варианта крышки, калибровка температуры пользователем.",
+    specs: [
+      { label: "Макс. нагрузка", value: "4 кг" },
+      { label: "Вместимость", value: "4 микропланшета" },
+      { label: "Крышка", value: "Непрозрачная / прозрачная" },
+    ],
+  },
+  {
+    listing: ["equipment", "incubating-incubating-cooling-shakers"],
+    model: "incubating-heavy-duty-orbital",
+    name: "Орбитальные шейкеры-инкубаторы тяжелого типа",
+    series: "incubating",
+    seriesLabel: "Шейкеры-инкубаторы",
+    image: `${CDN}/188547c0-b787-402c-972f-115d877f5797/Incubating_HD_Orbital_Shaker_16HDG_Right`,
+    summary:
+      "Орбитальные шейкеры-инкубаторы тяжелого типа с системой принудительной вентиляции Opti-Flow и точной регулировкой скорости Accu-Drive. Трёхэксцентриковый привод, равномерное распределение тепла.",
+    specs: [
+      { label: "Вентиляция", value: "Opti-Flow (два двигателя)" },
+      { label: "Управление", value: "Accu-Drive" },
+      { label: "Вместимость", value: "2 × 6 л колбы Эрленмейера" },
+    ],
+  },
+  {
+    listing: ["equipment", "incubating-incubating-cooling-shakers"],
+    model: "incubating-rocking-waving",
+    name: "Инкубаторы-качалки и волновые шейкеры-инкубаторы",
+    series: "incubating",
+    seriesLabel: "Шейкеры-инкубаторы",
+    image: `${CDN}/a17c7422-ee37-4389-abbe-0321c8b2398d/Incubating_Rocking_Waving_AMain_600x600`,
+    summary:
+      "Инкубаторы-качалки и волновые шейкеры-инкубаторы с электронной регулировкой угла (шаг 1°), скорости (1 об/мин) и температуры (1 °C). Плавный разгон против расплёскивания, режимы 3D и волны.",
+    specs: [
+      { label: "Угол", value: "Электронный, шаг 1°" },
+      { label: "Скорость", value: "Шаг 1 об/мин" },
+      { label: "Температура", value: "Шаг 1 °C" },
+      { label: "Режимы", value: "3D-качание, волна" },
+    ],
+  },
+
+  // --- Вихревые смесители ---
+  {
+    listing: ["equipment", "laboratory-vortex-mixers"],
+    model: "heavy-duty-vortex",
+    name: "Вихревые смесители тяжелого типа",
+    series: "vortex",
+    seriesLabel: "Вортексы",
+    image: `${CDN}/1237d44f-dd8a-4c42-b82b-08f4b6ff1ce8/Heavy_Duty_Vortex_AMain_600x600`,
+    summary:
+      "Вихревые смесители (вортексы) тяжелого типа с максимальной нагрузкой 1,1 кг и немецким двигателем для непрерывной работы. Регулировка скорости в цифровых и аналоговых моделях.",
+    specs: [
+      { label: "Макс. нагрузка", value: "1,1 кг" },
+      { label: "Двигатель", value: "Немецкий, для непрерывной работы" },
+      { label: "Управление", value: "Цифровое / аналоговое" },
+    ],
+  },
+  {
+    listing: ["equipment", "laboratory-vortex-mixers"],
+    model: "multi-tube-vortex",
+    name: "Многоместные вихревые смесители для пробирок",
+    series: "vortex",
+    seriesLabel: "Вортексы",
+    image: `${CDN}/071728e9-5443-494c-b18f-1e4bb345cd4f/Multi-Tube_Vortex_AMain_600x600`,
+    summary:
+      "Многоместные вортексы для одновременного перемешивания до 50 проб. Корпус из нержавеющей стали, шесть конфигураций штативов, программируемый импульсный режим в цифровых моделях.",
+    specs: [
+      { label: "Вместимость", value: "до 50 проб" },
+      { label: "Корпус", value: "Нержавеющая сталь" },
+      { label: "Штативы", value: "6 конфигураций" },
+      { label: "Режим", value: "Программируемый импульсный" },
+    ],
+  },
+  {
+    listing: ["equipment", "laboratory-vortex-mixers"],
+    model: "microplate-vortex",
+    name: "Вихревые смесители для микропланшетов",
+    series: "vortex",
+    seriesLabel: "Вортексы",
+    image: `${CDN}/ff9633e3-20d5-4d09-8d8f-442da57289eb/Microplate_Vortex_AMain_600x600`,
+    summary:
+      "Вортексы для микропланшетов со специальной фиксацией планшета и немецким двигателем. Полный диапазон скоростей, цифровое и аналоговое управление, безопасное высокоскоростное перемешивание.",
+    specs: [
+      { label: "Назначение", value: "Микропланшеты" },
+      { label: "Двигатель", value: "Немецкий" },
+      { label: "Управление", value: "Цифровое / аналоговое" },
+    ],
+  },
+  {
+    listing: ["equipment", "laboratory-vortex-mixers"],
+    model: "mini-vortex",
+    name: "Вихревые смесители Mini",
+    series: "vortex",
+    seriesLabel: "Вортексы",
+    image: `${CDN}/931d0e57-1af2-4036-80b6-84cc7294ef83/Mini_Vortex_Main_600x600`,
+    summary:
+      "Компактные вортексы Mini с сенсорным запуском и непрерывным режимом. Регулируемая скорость в цифровых и аналоговых моделях, экономичная версия с фиксированной скоростью, нескользящее основание.",
+    specs: [
+      { label: "Режимы", value: "Сенсорный запуск / непрерывный" },
+      { label: "Скорость", value: "Регулируемая или фиксированная" },
+      { label: "Основание", value: "Нескользящее" },
+    ],
+  },
+
+  // --- Твердотельные термостаты ---
+  {
+    listing: ["equipment", "dry-block-heaters"],
+    model: "single-block",
+    name: "Твердотельные термостаты на 1 блок",
+    series: "dry-block",
+    seriesLabel: "Твердотельные термостаты",
+    image: `${CDN}/ff60d70f-cf50-4b20-ae42-25836d90bafa/1_Block_Dry_Block_AMain_600x600`,
+    summary:
+      "Твердотельные термостаты на один нагревательный блок с цифровым или аналоговым управлением. Сенсорная панель в цифровых моделях, раздельная индикация температуры и времени, высокая стабильность.",
+    specs: [
+      { label: "Блоки", value: "1" },
+      { label: "Управление", value: "Цифровое / аналоговое" },
+      { label: "Индикация", value: "Раздельная: температура и время" },
+    ],
+  },
+  {
+    listing: ["equipment", "dry-block-heaters"],
+    model: "two-block",
+    name: "Твердотельные термостаты на 2 блока",
+    series: "dry-block",
+    seriesLabel: "Твердотельные термостаты",
+    image: `${CDN}/815ef1a5-9b71-492c-8498-f7da19a97c08/2_Block_Dry_Block_AMain_600x600`,
+    summary:
+      "Твердотельные термостаты на два нагревательных блока с опциональной подогреваемой крышкой для снижения конденсата. Одноточечная калибровка, цифровые и аналоговые модели.",
+    specs: [
+      { label: "Блоки", value: "2" },
+      { label: "Крышка", value: "Подогреваемая (опция)" },
+      { label: "Калибровка", value: "Одноточечная" },
+    ],
+  },
+  {
+    listing: ["equipment", "dry-block-heaters"],
+    model: "four-block",
+    name: "Твердотельные термостаты на 4 блока",
+    series: "dry-block",
+    seriesLabel: "Твердотельные термостаты",
+    image: `${CDN}/6d4936b6-c30c-4ff4-a218-b1633d87e4d9/4_Block_Dry_Block_AMain_600x600`,
+    summary:
+      "Твердотельные термостаты на четыре нагревательных блока для одновременной обработки нескольких проб. Одноточечная калибровка, сенсорная панель в цифровых моделях.",
+    specs: [
+      { label: "Блоки", value: "4" },
+      { label: "Калибровка", value: "Одноточечная" },
+      { label: "Управление", value: "Цифровое / аналоговое" },
+    ],
+  },
+  {
+    listing: ["equipment", "dry-block-heaters"],
+    model: "six-block",
+    name: "Твердотельные термостаты на 6 блоков",
+    series: "dry-block",
+    seriesLabel: "Твердотельные термостаты",
+    image: `${CDN}/cbd4ab42-93bf-40d8-9fcb-c5b70132b355/6_Block_Dry_Block_AMain_600x600`,
+    summary:
+      "Твердотельные термостаты на шесть нагревательных блоков — максимальная производительность для высокопоточных лабораторий. Одноточечная калибровка, цифровые и аналоговые модели.",
+    specs: [
+      { label: "Блоки", value: "6" },
+      { label: "Применение", value: "Высокопоточные лаборатории" },
+      { label: "Калибровка", value: "Одноточечная" },
+    ],
+  },
+
+  // --- Верхнеприводные мешалки ---
+  {
+    listing: ["equipment", "overhead-stirrers"],
+    model: "achiever-5000",
+    name: "Верхнеприводная мешалка Achiever™ 5000",
+    series: "achiever-5000",
+    seriesLabel: "Achiever™ 5000",
+    image: `${CDN}/fd02aeee-2e53-4078-9c56-48ed3023be80/Achiever_Family`,
+    summary:
+      "Верхнеприводная мешалка Achiever™ 5000 с бесщёточным двигателем и компенсацией крутящего момента. Мощное перемешивание вязких жидкостей, защита от перегрузки и быстрозажимной патрон для замены вала одной рукой.",
+    specs: [
+      { label: "Двигатель", value: "Бесщёточный, с компенсацией момента" },
+      { label: "Патрон", value: "Быстрозажимной, без инструмента" },
+      { label: "Защита", value: "Определение перегрузки, автоотключение" },
+      { label: "Применение", value: "Вязкие жидкости" },
+    ],
+  },
+
+  // --- Нагревательные плиты и мешалки ---
+  {
+    listing: ["equipment", "hotplates-stirrers"],
+    model: "guardian-7000",
+    name: "Магнитные мешалки с подогревом Guardian™ 7000",
+    series: "guardian-7000",
+    seriesLabel: "Guardian™ 7000",
+    image: `${CDN}/84ea0888-398c-41c0-8e4b-836ad70597c0/Guardian_7000_Left_Beaker_1_600x600`,
+    summary:
+      "Магнитные мешалки с подогревом Guardian™ 7000 со скоростью перемешивания 60–1600 об/мин. Технологии безопасности SmartPresence™ и SmartLink™, двойной независимый контроль перегрева, мощный двигатель.",
+    specs: [
+      { label: "Скорость перемешивания", value: "60–1600 об/мин" },
+      { label: "Безопасность", value: "SmartPresence™, SmartLink™" },
+      { label: "Контроль перегрева", value: "Двойной независимый" },
+    ],
+  },
+  {
+    listing: ["equipment", "hotplates-stirrers"],
+    model: "guardian-5000-g51",
+    name: "Магнитные мешалки с подогревом Guardian™ 5000 (G51)",
+    series: "guardian-5000",
+    seriesLabel: "Guardian™ 5000",
+    image: `${CDN}/e2c1be7d-b6c3-43a6-994d-c68edbea5279/Guardian_5000_Right_Beaker_1_600x600`,
+    summary:
+      "Магнитные мешалки с подогревом Guardian™ 5000 (G51), скорость 60–1600 об/мин. Ненагревающийся корпус SmartHousing™, индикатор горячей поверхности (выше 40 °C), химически стойкая панель управления.",
+    specs: [
+      { label: "Скорость перемешивания", value: "60–1600 об/мин" },
+      { label: "Корпус", value: "SmartHousing™ (не нагревается)" },
+      { label: "Индикатор", value: "Горячая поверхность > 40 °C" },
+    ],
+  },
+  {
+    listing: ["equipment", "hotplates-stirrers"],
+    model: "guardian-5000-g52",
+    name: "Магнитные мешалки с подогревом Guardian™ 5000 (G52 UniBlock)",
+    series: "guardian-5000",
+    seriesLabel: "Guardian™ 5000",
+    image: `${CDN}/9ca8df98-eac7-43e0-9002-3e61f1841015/Guardian-5000_G52_RD_UniBlock_600X600`,
+    summary:
+      "Магнитные мешалки с подогревом Guardian™ 5000 (G52 UniBlock), скорость 60–1600 об/мин. Ненагревающийся корпус SmartHousing™, индикатор горячей поверхности и надёжная магнитная связь.",
+    specs: [
+      { label: "Скорость перемешивания", value: "60–1600 об/мин" },
+      { label: "Корпус", value: "SmartHousing™ (не нагревается)" },
+      { label: "Индикатор", value: "Горячая поверхность > 40 °C" },
+    ],
+  },
+  {
+    listing: ["equipment", "hotplates-stirrers"],
+    model: "mini-hotplates",
+    name: "Мини нагревательные плиты и мешалки",
+    series: "mini-hotplates",
+    seriesLabel: "Mini Hotplates",
+    image: `${CDN}/426fa16d-7484-49e2-8ef0-790bc95c2f88/Mini-Hotplates-and-Stirrers-Main`,
+    summary:
+      "Компактные нагревательные плиты и мешалки с химически стойкой керамической поверхностью и термостойким полимерным корпусом (cool-touch). Держатель с фиксацией для крепления штатива, лёгкая очистка.",
+    specs: [
+      { label: "Поверхность", value: "Химически стойкая керамика" },
+      { label: "Корпус", value: "Термостойкий полимер (cool-touch)" },
+      { label: "Применение", value: "Учебные лаборатории" },
+    ],
+  },
 ];
