@@ -14,6 +14,15 @@ export function productHref(p: Product): string {
   return `/products/${productSegments(p).join("/")}`;
 }
 
+/**
+ * Local image path for a product, served from /public.
+ * Convention: /products/<последний сегмент listing>/<model>.jpg
+ */
+export function productImage(p: Product): string {
+  const folder = p.listing[p.listing.length - 1];
+  return `/products/${folder}/${p.model}.jpg`;
+}
+
 function segEquals(a: string[], b: string[]): boolean {
   return a.length === b.length && a.every((x, i) => x === b[i]);
 }

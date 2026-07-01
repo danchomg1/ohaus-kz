@@ -14,6 +14,7 @@ import {
   findProductByPath,
   productsForListing,
   productHref,
+  productImage,
 } from "@/lib/products";
 
 /** Breadcrumbs for a catalog path; the last segment is the current page. */
@@ -51,7 +52,7 @@ export default function CatalogView({ segments }: { segments: string[] }) {
               key={p.model}
               name={p.name}
               series={p.seriesLabel}
-              image={p.image}
+              image={productImage(p)}
               href={productHref(p)}
             />
           ))}

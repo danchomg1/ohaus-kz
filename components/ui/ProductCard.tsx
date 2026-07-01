@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import Skeleton from "./Skeleton";
+import ProductImage from "./ProductImage";
 
 type ProductCardProps = {
   name?: string;
@@ -25,10 +25,9 @@ export default function ProductCard({
     <div className="flex h-full flex-col border border-ohaus-line bg-white transition-shadow group-hover:shadow-card">
       <div className="relative flex aspect-square items-center justify-center bg-white p-4">
         {image ? (
-          <Image
+          <ProductImage
             src={image}
             alt={name ?? ""}
-            fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="object-contain p-4"
           />

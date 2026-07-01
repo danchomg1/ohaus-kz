@@ -17,7 +17,8 @@
       "Bash(curl --version)",
       "Bash(curl -sSL -A \"Mozilla/5.0\" -o public/products/_test.bin -w \"http_code=%{http_code} size=%{size_download}\\\\n\" \"https://www.ohaus.ru/getmedia/8a4a0429-2caf-4504-b6c0-c24af11606ae/Explorer_Semi_Micro_600x600\")",
       "Bash(rm -rf public/products)",
-      "Bash(rm -f /tmp/imgs.txt)"
+      "Bash(rm -f /tmp/imgs.txt)",
+      "Bash(node -e ' *)"
     ]
   }
 }

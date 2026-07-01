@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import ProductImage from "@/components/ui/ProductImage";
 import Breadcrumbs, { type Crumb } from "@/components/layout/Breadcrumbs";
-import type { Product } from "@/lib/products";
+import { type Product, productImage } from "@/lib/products";
 
 type ProductDetailProps = {
   product: Product;
@@ -17,10 +17,9 @@ export default function ProductDetail({ product, crumbs }: ProductDetailProps) {
       <div className="grid grid-cols-1 gap-8 pb-16 lg:grid-cols-2">
         {/* Image */}
         <div className="relative aspect-square border border-ohaus-line bg-white">
-          <Image
-            src={product.image}
+          <ProductImage
+            src={productImage(product)}
             alt={product.name}
-            fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-contain p-8"
             priority
