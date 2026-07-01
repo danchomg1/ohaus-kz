@@ -15,12 +15,18 @@ export function productHref(p: Product): string {
 }
 
 /**
- * Local image path for a product, served from /public.
- * Convention: /products/<последний сегмент listing>/<model>.jpg
+ * Local image base path (without extension) for a product, served from /public.
+ * Convention: /products/<последний сегмент listing>/<model>
+ * Gallery files: <base>.jpg (главное) + <base>1.jpg … <base>5.jpg (доп.).
  */
-export function productImage(p: Product): string {
+export function productImageBase(p: Product): string {
   const folder = p.listing[p.listing.length - 1];
-  return `/products/${folder}/${p.model}.jpg`;
+  return `/products/${folder}/${p.model}`;
+}
+
+/** Main image path for a product (used on cards). */
+export function productImage(p: Product): string {
+  return `${productImageBase(p)}.jpg`;
 }
 
 function segEquals(a: string[], b: string[]): boolean {

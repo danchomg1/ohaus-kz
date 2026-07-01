@@ -1,8 +1,8 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import ProductImage from "@/components/ui/ProductImage";
+import ProductGallery from "./ProductGallery";
 import Breadcrumbs, { type Crumb } from "@/components/layout/Breadcrumbs";
-import { type Product, productImage } from "@/lib/products";
+import { type Product, productImageBase } from "@/lib/products";
 
 type ProductDetailProps = {
   product: Product;
@@ -15,16 +15,8 @@ export default function ProductDetail({ product, crumbs }: ProductDetailProps) {
       <Breadcrumbs items={crumbs} />
 
       <div className="grid grid-cols-1 gap-8 pb-16 lg:grid-cols-2">
-        {/* Image */}
-        <div className="relative aspect-square border border-ohaus-line bg-white">
-          <ProductImage
-            src={productImage(product)}
-            alt={product.name}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-contain p-8"
-            priority
-          />
-        </div>
+        {/* Image gallery */}
+        <ProductGallery base={productImageBase(product)} alt={product.name} />
 
         {/* Info */}
         <div>
