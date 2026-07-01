@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { roboto, openSans } from "./fonts";
 import "./globals.css";
-import TopBar from "@/components/layout/TopBar";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -21,11 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${roboto.variable} ${openSans.variable}`}>
-      <body className="flex min-h-screen flex-col bg-ohaus-bg font-sans text-ohaus-ink">
-        <TopBar />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-screen bg-ohaus-bg font-sans text-ohaus-ink">
+        {children}
       </body>
     </html>
   );
