@@ -130,7 +130,7 @@ export const product = defineType({
       of: [
         defineArrayMember({
           type: "object",
-          name: "document",
+          name: "docFile",
           fields: [
             {
               name: "title",

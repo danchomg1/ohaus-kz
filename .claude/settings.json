@@ -20,7 +20,13 @@
       "Bash(rm -f /tmp/imgs.txt)",
       "Bash(node -e ' *)",
       "Bash(git check-ignore *)",
-      "Bash(grep -vE \"^\\\\s*$\")"
+      "Bash(grep -vE \"^\\\\s*$\")",
+      "Bash(timeout 120 npm run migrate)",
+      "Bash(npx tsx *)",
+      "Bash(npm start *)",
+      "Bash(break)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/studio)",
+      "Bash(curl -s http://localhost:3000/studio)"
     ]
   }
 }
