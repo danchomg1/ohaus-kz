@@ -31,6 +31,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# источник картинок для заливки в Sanity (в репозиторий не нужен)
+/public/ohaus-products-images
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
