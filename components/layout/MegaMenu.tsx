@@ -1,25 +1,29 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ChevronRight, ImageIcon } from "lucide-react";
-import { catalog, hrefForSlug } from "@/lib/catalog";
+import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { NavSegment } from "@/sanity/lib/queries";
 
 type MegaMenuProps = {
   open: boolean;
   onClose: () => void;
+  segments: NavSegment[];
 };
 
-const ALL_PRODUCTS_TAB = "__all__";
+function groupsOf(seg: NavSegment) {
+  const map = new Map<string, { title: string; slug: string }[]>();
+  for (const s of seg.subcategories) {
+    const arr = map.get(s.group) ?? [];
+    arr.push({ title: s.title, slug: s.slug });
+    map.set(s.group, arr);
+  }
+  return [...map.entries()];
+}
 
-/**
- * Desktop "Продукты" mega-menu: dark segment tabs (left) + groups (center)
- * + a per-segment promo card (right). Data from lib/catalog.
- */
-export default function MegaMenu({ open, onClose }: MegaMenuProps) {
-  const [activeSlug, setActiveSlug] = useState(catalog[0]?.slug ?? "");
-  const panelRef = useRef<HTMLDivElement>(null);
+export default function MegaMenu({ open, onClose, segments }: MegaMenuProps) {
+  const [activeSlug, setActiveSlug] = useState(segments[0]?.slug ?? "");
 
   useEffect(() => {
     if (!open) return;
@@ -30,37 +34,34 @@ export default function MegaMenu({ open, onClose }: MegaMenuProps) {
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || segments.length === 0) return null;
 
-  const activeSegment =
-    activeSlug === ALL_PRODUCTS_TAB
-      ? null
-      : catalog.find((s) => s.slug === activeSlug);
+  const active =
+    segments.find((s) => s.slug === activeSlug) ?? segments[0];
+  const groups = groupsOf(active);
 
   return (
     <div
-      ref={panelRef}
       id="mega-menu"
       role="region"
       aria-label="Каталог продуктов"
       className="absolute left-0 right-0 top-full z-40 hidden border-t border-ohaus-line bg-white shadow-header lg:block"
     >
-      <div className="container-site grid grid-cols-[240px_1fr] gap-0 py-0">
-        {/* Left: dark segment tabs */}
+      <div className="container-site grid grid-cols-[240px_1fr] py-0">
         <ul className="bg-ohaus-gray-dark py-4">
-          {catalog.map((segment) => (
+          {segments.map((segment) => (
             <li key={segment.slug}>
               <button
                 type="button"
                 onMouseEnter={() => setActiveSlug(segment.slug)}
                 onFocus={() => setActiveSlug(segment.slug)}
                 onClick={() => setActiveSlug(segment.slug)}
-                aria-current={activeSlug === segment.slug ? "true" : undefined}
+                aria-current={active.slug === segment.slug ? "true" : undefined}
                 className={cn(
-                  "flex w-full items-center justify-between px-5 py-2.5 text-left font-sans text-sm text-white/80 transition-colors",
-                  activeSlug === segment.slug
+                  "flex w-full items-center justify-between px-5 py-2.5 text-left font-sans text-sm transition-colors",
+                  active.slug === segment.slug
                     ? "bg-ohaus-red text-white"
-                    : "hover:bg-white/10 hover:text-white",
+                    : "text-white/80 hover:bg-white/10 hover:text-white",
                 )}
               >
                 <span>{segment.title}</span>
@@ -79,55 +80,28 @@ export default function MegaMenu({ open, onClose }: MegaMenuProps) {
           </li>
         </ul>
 
-        {/* Center + right */}
-        {activeSegment ? (
-          <div className="grid grid-cols-[1fr_260px]">
-            <div className="grid grid-cols-2 gap-x-8 gap-y-6 p-8">
-              {activeSegment.groups.map((group) => (
-                <div key={group.title}>
-                  <h3 className="mb-2 font-heading text-sm font-bold uppercase tracking-wide text-ohaus-ink">
-                    {group.title}
-                  </h3>
-                  <ul className="space-y-1.5">
-                    {group.links.map((link) => (
-                      <li key={`${group.title}-${link.slug}`}>
-                        <Link
-                          href={hrefForSlug(link.slug)}
-                          onClick={onClose}
-                          className="font-sans text-sm text-ohaus-red transition-colors hover:text-ohaus-red-dark hover:underline"
-                        >
-                          {link.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-6 p-8">
+          {groups.map(([group, links]) => (
+            <div key={group}>
+              <h3 className="mb-2 font-heading text-sm font-bold uppercase tracking-wide text-ohaus-ink">
+                {group}
+              </h3>
+              <ul className="space-y-1.5">
+                {links.map((link) => (
+                  <li key={link.slug}>
+                    <Link
+                      href={`/products/${link.slug}`}
+                      onClick={onClose}
+                      className="font-sans text-sm text-ohaus-red transition-colors hover:text-ohaus-red-dark hover:underline"
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            {/* Promo */}
-            <aside className="border-l border-ohaus-line bg-ohaus-bg-soft p-6">
-              {activeSegment.promo ? (
-                <Link
-                  href={hrefForSlug(activeSegment.promo.slug)}
-                  onClick={onClose}
-                  className="group block"
-                >
-                  <div className="flex aspect-[4/3] items-center justify-center bg-white shadow-card">
-                    <ImageIcon
-                      className="h-10 w-10 text-ohaus-line"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <p className="mt-3 font-heading text-sm font-bold text-ohaus-ink group-hover:text-ohaus-red">
-                    {activeSegment.promo.title}
-                  </p>
-                  <span className="text-xs text-ohaus-muted">Подробнее →</span>
-                </Link>
-              ) : null}
-            </aside>
-          </div>
-        ) : null}
+          ))}
+        </div>
       </div>
     </div>
   );

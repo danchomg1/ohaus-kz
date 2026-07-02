@@ -26,7 +26,12 @@
       "Bash(npm start *)",
       "Bash(break)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/studio)",
-      "Bash(curl -s http://localhost:3000/studio)"
+      "Bash(curl -s http://localhost:3000/studio)",
+      "Bash(git rm *)",
+      "Bash(cd \"d:/Schneider - сайт/Ohaus\" && rm -rf \"app/\\(site\\)/products/[category]\" && rm -f components/catalog/CatalogView.tsx && rm -f components/ui/ProductImage.tsx && echo \"removed old category tree, CatalogView, ProductImage\" && ls \"app/\\(site\\)/products\")"
+    ],
+    "additionalDirectories": [
+      "D:\\Schneider - сайт\\Ohaus\\app\\(site)\\products\\[category]"
     ]
   }
 }

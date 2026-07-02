@@ -9,14 +9,20 @@ import MainNav from "./MainNav";
 import MegaMenu from "./MegaMenu";
 import MobileNav from "./MobileNav";
 import SearchBox from "./SearchBox";
+import type { NavSegment } from "@/sanity/lib/queries";
 
-export default function Header() {
+export default function Header({
+  segments,
+  logoUrl,
+}: {
+  segments: NavSegment[];
+  logoUrl?: string;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
-  // Sticky shadow on scroll
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > 4);
@@ -26,7 +32,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close menus on route change
   useEffect(() => {
     setMegaOpen(false);
     setMobileOpen(false);
@@ -41,9 +46,8 @@ export default function Header() {
     >
       <div className="relative">
         <div className="container-site flex h-16 items-center justify-between gap-4">
-          <Logo />
+          <Logo src={logoUrl} />
 
-          {/* Desktop nav */}
           <div className="hidden items-center gap-6 lg:flex">
             <MainNav
               megaOpen={megaOpen}
@@ -52,7 +56,6 @@ export default function Header() {
             <SearchBox />
           </div>
 
-          {/* Mobile burger */}
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
@@ -64,11 +67,13 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Desktop mega-menu (overlays below header) */}
-        <MegaMenu open={megaOpen} onClose={() => setMegaOpen(false)} />
+        <MegaMenu
+          open={megaOpen}
+          onClose={() => setMegaOpen(false)}
+          segments={segments}
+        />
       </div>
 
-      {/* Backdrop to close mega-menu on outside click */}
       {megaOpen ? (
         <div
           className="fixed inset-0 top-0 z-30 hidden lg:block"
@@ -77,8 +82,11 @@ export default function Header() {
         />
       ) : null}
 
-      {/* Mobile off-canvas */}
-      <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileNav
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        segments={segments}
+      />
     </header>
   );
 }

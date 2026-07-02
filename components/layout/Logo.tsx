@@ -7,15 +7,13 @@ import { cn } from "@/lib/utils";
 
 type LogoProps = {
   className?: string;
+  /** URL логотипа из настроек сайта (Sanity). Если нет — текстовый вариант. */
+  src?: string;
 };
 
-/**
- * Site logo. Loads /logo.svg from /public when present; until then falls
- * back to a red OHAUS text wordmark. Replace by dropping the brand-kit file
- * at public/logo.svg (or change the src below to /logo.png).
- */
-export default function Logo({ className }: LogoProps) {
+export default function Logo({ className, src }: LogoProps) {
   const [error, setError] = useState(false);
+  const showImage = Boolean(src) && !error;
 
   return (
     <Link
@@ -23,7 +21,18 @@ export default function Logo({ className }: LogoProps) {
       aria-label="OHAUS Kazakhstan — на главную"
       className={cn("inline-flex items-center", className)}
     >
-      {error ? (
+      {showImage ? (
+        <span className="relative block h-8 w-[150px] sm:h-9">
+          <Image
+            src={src as string}
+            alt="OHAUS Kazakhstan"
+            fill
+            priority
+            className="object-contain object-left"
+            onError={() => setError(true)}
+          />
+        </span>
+      ) : (
         <svg
           viewBox="0 0 168 44"
           role="img"
@@ -42,18 +51,6 @@ export default function Logo({ className }: LogoProps) {
             OHAUS
           </text>
         </svg>
-      ) : (
-        <span className="relative block h-8 w-[150px] sm:h-9">
-          <Image
-            src="/logo.svg"
-            alt="OHAUS Kazakhstan"
-            fill
-            priority
-            unoptimized
-            className="object-contain object-left"
-            onError={() => setError(true)}
-          />
-        </span>
       )}
       <span className="sr-only">OHAUS Kazakhstan</span>
     </Link>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
+import type { SiteSettings } from "@/sanity/lib/queries";
 
 const COLUMNS: { title: string; links: { title: string; href: string }[] }[] = [
   {
@@ -27,7 +28,10 @@ const COLUMNS: { title: string; links: { title: string; href: string }[] }[] = [
   },
 ];
 
-export default function Footer() {
+export default function Footer({ settings }: { settings?: SiteSettings }) {
+  const addressLines = (
+    settings?.address || "Казахстан, [индекс], [город],\n[улица, офис]"
+  ).split("\n");
   return (
     <footer className="mt-16 border-t border-ohaus-line bg-ohaus-bg-soft">
       <div className="container-site py-12">
@@ -63,11 +67,25 @@ export default function Footer() {
                 aria-hidden="true"
               />
               <span className="font-sans text-sm leading-relaxed text-ohaus-muted">
-                OHAUS Kazakhstan
-                <br />
-                Казахстан, [индекс], [город],
-                <br />
-                [улица, офис]
+                {settings?.companyName || "OHAUS Kazakhstan"}
+                {addressLines.map((line, i) => (
+                  <span key={i}>
+                    <br />
+                    {line}
+                  </span>
+                ))}
+                {settings?.phone ? (
+                  <>
+                    <br />
+                    {settings.phone}
+                  </>
+                ) : null}
+                {settings?.email ? (
+                  <>
+                    <br />
+                    {settings.email}
+                  </>
+                ) : null}
               </span>
             </address>
           </div>

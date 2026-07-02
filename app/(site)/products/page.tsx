@@ -3,14 +3,18 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
-import { catalog, hrefForSlug } from "@/lib/catalog";
+import { getCatalogOverview } from "@/sanity/lib/queries";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Все продукты",
   description: "Полный каталог продукции OHAUS по сегментам рынка.",
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const segments = await getCatalogOverview();
+
   return (
     <Container>
       <Breadcrumbs items={[{ title: "Продукты" }]} />
@@ -21,7 +25,7 @@ export default function ProductsPage() {
       />
 
       <div className="space-y-12 pb-12">
-        {catalog.map((segment) => (
+        {segments.map((segment) => (
           <section key={segment.slug} aria-label={segment.title}>
             <h2 className="mb-4 border-b border-ohaus-line pb-2 font-heading text-xl font-bold text-ohaus-ink">
               {segment.title}
@@ -34,9 +38,9 @@ export default function ProductsPage() {
                   </h3>
                   <ul className="space-y-1.5">
                     {group.links.map((link) => (
-                      <li key={`${group.title}-${link.slug}`}>
+                      <li key={link.slug}>
                         <Link
-                          href={hrefForSlug(link.slug)}
+                          href={`/products/${link.slug}`}
                           className="font-sans text-sm text-ohaus-red transition-colors hover:text-ohaus-red-dark hover:underline"
                         >
                           {link.title}

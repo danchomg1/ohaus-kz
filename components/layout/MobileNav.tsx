@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { X, ChevronDown } from "lucide-react";
-import { catalog, hrefForSlug } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 import SearchBox from "./SearchBox";
+import type { NavSegment } from "@/sanity/lib/queries";
 
 type MobileNavProps = {
   open: boolean;
   onClose: () => void;
+  segments: NavSegment[];
 };
 
 const STATIC_LINKS = [
@@ -19,16 +20,11 @@ const STATIC_LINKS = [
   { title: "Свяжитесь с нами", href: "/contacts" },
 ];
 
-/** Off-canvas mobile menu: segment → group → subcategory accordions. */
-export default function MobileNav({ open, onClose }: MobileNavProps) {
+export default function MobileNav({ open, onClose, segments }: MobileNavProps) {
   const [openSegment, setOpenSegment] = useState<string | null>(null);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -50,7 +46,6 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
       )}
       aria-hidden={!open}
     >
-      {/* Overlay */}
       <div
         onClick={onClose}
         className={cn(
@@ -59,7 +54,6 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
         )}
       />
 
-      {/* Panel */}
       <nav
         aria-label="Мобильное меню"
         className={cn(
@@ -86,13 +80,12 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          {/* Products — segment accordions */}
           <div className="border-b border-ohaus-line px-4 py-3">
             <p className="mb-2 font-heading text-sm font-bold uppercase tracking-wide text-ohaus-ink">
               Продукты
             </p>
             <ul>
-              {catalog.map((segment) => {
+              {segments.map((segment) => {
                 const isOpen = openSegment === segment.slug;
                 return (
                   <li key={segment.slug} className="border-t border-ohaus-line/70">
@@ -114,28 +107,19 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
                       />
                     </button>
                     {isOpen ? (
-                      <div className="pb-3 pl-3">
-                        {segment.groups.map((group) => (
-                          <div key={group.title} className="mb-2">
-                            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ohaus-muted">
-                              {group.title}
-                            </p>
-                            <ul className="space-y-1">
-                              {group.links.map((link) => (
-                                <li key={`${group.title}-${link.slug}`}>
-                                  <Link
-                                    href={hrefForSlug(link.slug)}
-                                    onClick={onClose}
-                                    className="block py-1 text-sm text-ohaus-red"
-                                  >
-                                    {link.title}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                      <ul className="space-y-1 pb-3 pl-3">
+                        {segment.subcategories.map((s) => (
+                          <li key={s.slug}>
+                            <Link
+                              href={`/products/${s.slug}`}
+                              onClick={onClose}
+                              className="block py-1 text-sm text-ohaus-red"
+                            >
+                              {s.title}
+                            </Link>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     ) : null}
                   </li>
                 );
@@ -152,7 +136,6 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
             </ul>
           </div>
 
-          {/* Static links */}
           <ul className="px-4 py-2">
             {STATIC_LINKS.map((item) => (
               <li key={item.href} className="border-b border-ohaus-line/70">
