@@ -6,11 +6,12 @@ const opts = { next: { revalidate: 60 } } as const;
 // ---------- Типы ----------
 export type SanityImage = { asset?: { _ref?: string }; alt?: string } | null;
 
-export type NavSub = { title: string; slug: string; group: string };
+export type NavLink = { title: string; slug: string };
+export type NavGroup = { title: string; links: NavLink[] };
 export type NavSegment = {
   title: string;
   slug: string;
-  subcategories: NavSub[];
+  groups: NavGroup[];
 };
 
 export type ProductCardData = {
@@ -48,43 +49,43 @@ export type ProductDetailData = {
 } | null;
 
 // ---------- Запросы ----------
-export function getNav(): Promise<NavSegment[]> {
-  return client.fetch(
+export async function getNav(): Promise<NavSegment[]> {
+  const raw = await client.fetch<
+    {
+      title: string;
+      slug: string;
+      groups?: ({ title?: string; links?: (NavLink | null)[] } | null)[];
+    }[]
+  >(
     `*[_type=="segment"]|order(order asc){
       title, "slug": slug.current,
-      "subcategories": *[_type=="subcategory" && references(^._id)]|order(order asc){
-        title, "slug": slug.current, group
+      groups[]{
+        title,
+        "links": items[]->{ title, "slug": slug.current }
       }
     }`,
     {},
     opts,
   );
+
+  // Ссылки на удалённые подкатегории приходят как null — отбрасываем их
+  // вместе с группами, от которых ничего не осталось.
+  return raw.map((seg) => ({
+    title: seg.title,
+    slug: seg.slug,
+    groups: (seg.groups ?? []).flatMap((g) => {
+      const links = (g?.links ?? []).filter(
+        (l): l is NavLink => !!l?.slug && !!l.title,
+      );
+      return g?.title && links.length ? [{ title: g.title, links }] : [];
+    }),
+  }));
 }
 
-export type OverviewSegment = {
-  title: string;
-  slug: string;
-  groups: { title: string; links: { title: string; slug: string }[] }[];
-};
+export type OverviewSegment = NavSegment;
 
-export async function getCatalogOverview(): Promise<OverviewSegment[]> {
-  const nav = await getNav();
-  return nav.map((seg) => {
-    const groupsMap = new Map<string, { title: string; slug: string }[]>();
-    for (const s of seg.subcategories) {
-      const arr = groupsMap.get(s.group) ?? [];
-      arr.push({ title: s.title, slug: s.slug });
-      groupsMap.set(s.group, arr);
-    }
-    return {
-      title: seg.title,
-      slug: seg.slug,
-      groups: [...groupsMap.entries()].map(([title, links]) => ({
-        title,
-        links,
-      })),
-    };
-  });
+export function getCatalogOverview(): Promise<OverviewSegment[]> {
+  return getNav();
 }
 
 export function getSubcategorySlugs(): Promise<string[]> {

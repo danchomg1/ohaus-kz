@@ -13,8 +13,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { loadEnvConfig } from "@next/env";
 import { createClient } from "@sanity/client";
-import { catalog, productPathSegments } from "../lib/catalog";
 import { products } from "../lib/products";
+import { seedNav } from "./seed-nav";
 
 loadEnvConfig(process.cwd());
 
@@ -41,57 +41,8 @@ const key = (...parts: (string | number)[]) =>
   parts.join("-").replace(/[^a-zA-Z0-9_-]/g, "");
 
 async function main() {
-  // 1) Сегменты
-  console.log("→ Сегменты…");
-  for (let i = 0; i < catalog.length; i++) {
-    const seg = catalog[i];
-    await client.createOrReplace({
-      _id: `segment.${seg.slug}`,
-      _type: "segment",
-      title: seg.title,
-      slug: { _type: "slug", current: seg.slug },
-      order: i,
-      promoTitle: seg.promo?.title,
-    });
-  }
-
-  // 2) Подкатегории (агрегируем сегменты и группу)
-  console.log("→ Подкатегории…");
-  type SubAgg = {
-    title: string;
-    group: string;
-    segments: Set<string>;
-  };
-  const subs = new Map<string, SubAgg>();
-  for (const seg of catalog) {
-    for (const group of seg.groups) {
-      for (const link of group.links) {
-        const parts = productPathSegments(link.slug);
-        const subSlug = parts[parts.length - 1];
-        const agg = subs.get(subSlug) ?? {
-          title: link.title,
-          group: group.title,
-          segments: new Set<string>(),
-        };
-        agg.segments.add(seg.slug);
-        subs.set(subSlug, agg);
-      }
-    }
-  }
-  for (const [subSlug, agg] of subs) {
-    await client.createOrReplace({
-      _id: `subcategory.${subSlug}`,
-      _type: "subcategory",
-      title: agg.title,
-      slug: { _type: "slug", current: subSlug },
-      group: agg.group,
-      segments: [...agg.segments].map((s) => ({
-        _type: "reference",
-        _ref: `segment.${s}`,
-        _key: key("seg", s),
-      })),
-    });
-  }
+  // 1-2) Сегменты, группы меню и подкатегории
+  await seedNav(client);
 
   // 3) Товары (+ загрузка фото)
   console.log("→ Товары и фото…");

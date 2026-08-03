@@ -12,16 +12,6 @@ type MegaMenuProps = {
   segments: NavSegment[];
 };
 
-function groupsOf(seg: NavSegment) {
-  const map = new Map<string, { title: string; slug: string }[]>();
-  for (const s of seg.subcategories) {
-    const arr = map.get(s.group) ?? [];
-    arr.push({ title: s.title, slug: s.slug });
-    map.set(s.group, arr);
-  }
-  return [...map.entries()];
-}
-
 export default function MegaMenu({ open, onClose, segments }: MegaMenuProps) {
   const [activeSlug, setActiveSlug] = useState(segments[0]?.slug ?? "");
 
@@ -38,7 +28,6 @@ export default function MegaMenu({ open, onClose, segments }: MegaMenuProps) {
 
   const active =
     segments.find((s) => s.slug === activeSlug) ?? segments[0];
-  const groups = groupsOf(active);
 
   return (
     <div
@@ -80,14 +69,16 @@ export default function MegaMenu({ open, onClose, segments }: MegaMenuProps) {
           </li>
         </ul>
 
-        <div className="grid grid-cols-2 gap-x-8 gap-y-6 p-8">
-          {groups.map(([group, links]) => (
-            <div key={group}>
+        {/* columns-2, а не grid: группы раскладываются по колонкам сверху вниз,
+            как в исходном меню, и не рвутся посередине. */}
+        <div className="columns-2 gap-x-8 p-8">
+          {active.groups.map((group) => (
+            <div key={group.title} className="mb-6 break-inside-avoid">
               <h3 className="mb-2 font-heading text-sm font-bold uppercase tracking-wide text-ohaus-ink">
-                {group}
+                {group.title}
               </h3>
               <ul className="space-y-1.5">
-                {links.map((link) => (
+                {group.links.map((link) => (
                   <li key={link.slug}>
                     <Link
                       href={`/products/${link.slug}`}

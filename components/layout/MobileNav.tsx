@@ -107,19 +107,28 @@ export default function MobileNav({ open, onClose, segments }: MobileNavProps) {
                       />
                     </button>
                     {isOpen ? (
-                      <ul className="space-y-1 pb-3 pl-3">
-                        {segment.subcategories.map((s) => (
-                          <li key={s.slug}>
-                            <Link
-                              href={`/products/${s.slug}`}
-                              onClick={onClose}
-                              className="block py-1 text-sm text-ohaus-red"
-                            >
-                              {s.title}
-                            </Link>
-                          </li>
+                      <div className="space-y-3 pb-3 pl-3">
+                        {segment.groups.map((group) => (
+                          <div key={group.title}>
+                            <p className="mb-1 font-heading text-xs font-bold uppercase tracking-wide text-ohaus-muted">
+                              {group.title}
+                            </p>
+                            <ul className="space-y-1">
+                              {group.links.map((link) => (
+                                <li key={link.slug}>
+                                  <Link
+                                    href={`/products/${link.slug}`}
+                                    onClick={onClose}
+                                    className="block py-1 text-sm text-ohaus-red"
+                                  >
+                                    {link.title}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     ) : null}
                   </li>
                 );

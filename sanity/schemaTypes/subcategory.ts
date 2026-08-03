@@ -1,8 +1,11 @@
 import { defineField, defineType } from "sanity";
 
 /**
- * Подкатегория (Аналитические весы, Центрифуги, ...). Может относиться
- * к нескольким сегментам и принадлежит группе (Весы / Оборудование / ...).
+ * Подкатегория (Аналитические весы, Центрифуги, ...) — страница /products/<slug>.
+ *
+ * К каким сегментам и группам она относится, задаётся не здесь, а в поле
+ * «Группы в меню» самого сегмента: заголовок группы у одной и той же
+ * подкатегории в разных сегментах различается.
  */
 export const subcategory = defineType({
   name: "subcategory",
@@ -22,29 +25,8 @@ export const subcategory = defineType({
       options: { source: "title", maxLength: 96 },
       validation: (r) => r.required(),
     }),
-    defineField({
-      name: "group",
-      title: "Группа",
-      type: "string",
-      description: "Заголовок-рубрика в мега-меню (Весы, Оборудование, ...).",
-      validation: (r) => r.required(),
-    }),
-    defineField({
-      name: "segments",
-      title: "Сегменты",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "segment" }] }],
-      description: "К каким сегментам относится эта подкатегория.",
-      validation: (r) => r.required().min(1),
-    }),
-    defineField({
-      name: "order",
-      title: "Порядок",
-      type: "number",
-      initialValue: 0,
-    }),
   ],
   preview: {
-    select: { title: "title", subtitle: "group" },
+    select: { title: "title", subtitle: "slug.current" },
   },
 });

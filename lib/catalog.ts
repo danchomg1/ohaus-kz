@@ -1,373 +1,154 @@
-// Catalog taxonomy for OHAUS Kazakhstan.
-// Organized by market segment -> group -> subcategory link.
-// Slugs are kept as on the real site (ru.ohaus.com); some are full paths
-// (products/...) and some are short (portable-scales-2).
+// Структура каталога для мега-меню: сегмент → группа → подкатегории.
+//
+// Одна подкатегория может входить в несколько сегментов, и в разных сегментах
+// её группа называется по-разному: «Прецизионные весы» лежат в группе «Весы»
+// (Лабораторные), «Лабораторные весы» (Пищевая) и «Взвешивание» (Образование).
+// Поэтому группа — свойство пары «сегмент + подкатегория», а не подкатегории.
+//
+// Это источник правды для сида Sanity (scripts/seed-nav.ts).
+// Сайт структуру отсюда не читает — он берёт её из CMS через getNav().
 
-export type Link = { title: string; slug: string }; // subcategory
-export type Group = { title: string; links: Link[] }; // group (Весы / Оборудование / ...)
-export type Segment = {
-  title: string;
-  slug: string;
-  groups: Group[];
-  promo?: { title: string; slug: string }; // segment promo card
-};
+/** Подкатегория: slug совпадает с URL /products/<slug>. */
+export type SubcategoryDef = { slug: string; title: string };
 
-export const catalog: Segment[] = [
+/** Группа-рубрика внутри сегмента; items — slug'и подкатегорий по порядку. */
+export type MenuGroup = { title: string; items: string[] };
+
+/** Сегмент рынка со своим набором групп. */
+export type MenuSegment = { slug: string; title: string; groups: MenuGroup[] };
+
+export const subcategories: SubcategoryDef[] = [
+  { slug: "analytical-balances", title: "Аналитические весы" },
+  { slug: "precision-balances", title: "Прецизионные весы" },
+  { slug: "portable-scales-2", title: "Портативные весы" },
+  { slug: "mechanical-scales", title: "Механические весы" },
+  { slug: "jewelry-scales", title: "Ювелирные весы" },
+  { slug: "bench-scales", title: "Платформенные весы" },
+  { slug: "counting-scales", title: "Счетные весы" },
+  { slug: "floor-scales", title: "Напольные весы" },
+  { slug: "indicators", title: "Терминалы" },
+  { slug: "moisture-analyzers", title: "Анализаторы влагосодержания" },
+  { slug: "water-analysis", title: "Анализаторы жидкости и электроды" },
+  { slug: "calibration-weights", title: "Калибровочные гири" },
+  { slug: "centrifuges", title: "Центрифуги" },
+  { slug: "open-air-shakers", title: "Открытые шейкеры" },
   {
-    title: "Лабораторные",
+    slug: "incubating-incubating-cooling-shakers",
+    title: "Шейкеры-инкубаторы и шейкеры-инкубаторы с охлаждением",
+  },
+  { slug: "laboratory-vortex-mixers", title: "Вихревые смесители" },
+  { slug: "dry-block-heaters", title: "Твердотельные термостаты" },
+  { slug: "overhead-stirrers", title: "Верхнеприводные мешалки" },
+  { slug: "hotplates-stirrers", title: "Нагревательные плиты и мешалки" },
+  { slug: "labjaws-clamps-supports", title: "Зажимы LabJaws и подставки" },
+  { slug: "equipment-accessories", title: "Аксессуары для оборудования" },
+];
+
+/** Полный список лабораторного оборудования — повторяется в двух сегментах. */
+const LAB_EQUIPMENT = [
+  "centrifuges",
+  "open-air-shakers",
+  "incubating-incubating-cooling-shakers",
+  "laboratory-vortex-mixers",
+  "dry-block-heaters",
+  "overhead-stirrers",
+  "hotplates-stirrers",
+  "labjaws-clamps-supports",
+];
+
+export const menu: MenuSegment[] = [
+  {
     slug: "lab",
-    promo: {
-      title: "Полумикровесы Explorer™",
-      slug: "products/balances-scales/analytical-balances",
-    },
+    title: "Лабораторные",
     groups: [
       {
         title: "Весы",
-        links: [
-          {
-            title: "Аналитические весы",
-            slug: "products/balances-scales/analytical-balances",
-          },
-          {
-            title: "Прецизионные весы",
-            slug: "products/balances-scales/precision-balances",
-          },
-          { title: "Портативные весы", slug: "portable-scales-2" },
+        items: [
+          "analytical-balances",
+          "precision-balances",
+          "portable-scales-2",
         ],
       },
-      {
-        title: "Оборудование",
-        links: [
-          { title: "Центрифуги", slug: "products/equipment/centrifuges" },
-          {
-            title: "Открытые шейкеры",
-            slug: "products/equipment/open-air-shakers",
-          },
-          {
-            title:
-              "Шейкеры-инкубаторы и шейкеры-инкубаторы с охлаждением",
-            slug: "products/equipment/incubating-incubating-cooling-shakers",
-          },
-          {
-            title: "Вихревые смесители",
-            slug: "products/equipment/laboratory-vortex-mixers",
-          },
-          {
-            title: "Твердотельные термостаты",
-            slug: "products/equipment/dry-block-heaters",
-          },
-          {
-            title: "Верхнеприводные мешалки",
-            slug: "products/equipment/overhead-stirrers",
-          },
-          {
-            title: "Нагревательные плиты и мешалки",
-            slug: "products/equipment/hotplates-stirrers",
-          },
-          {
-            title: "Зажимы LabJaws и подставки",
-            slug: "products/equipment/labjaws-clamps-supports",
-          },
-        ],
-      },
+      { title: "Оборудование", items: LAB_EQUIPMENT },
       {
         title: "Контрольно-измерительные приборы",
-        links: [
-          {
-            title: "Анализаторы жидкости и электроды",
-            slug: "products/instruments-equipment/water-analysis",
-          },
-        ],
+        items: ["water-analysis"],
       },
-      {
-        title: "Анализаторы влажности",
-        links: [
-          {
-            title: "Анализаторы влагосодержания",
-            slug: "products/balances-scales/moisture-analyzers",
-          },
-        ],
-      },
-      {
-        title: "Гири",
-        links: [
-          {
-            title: "Калибровочные гири",
-            slug: "products/weights/calibration-weights",
-          },
-        ],
-      },
+      { title: "Анализаторы влажности", items: ["moisture-analyzers"] },
+      { title: "Гири", items: ["calibration-weights"] },
     ],
   },
   {
-    title: "Промышленные",
     slug: "industrial",
-    promo: {
-      title: "Defender™ 3000, нержавеющая сталь",
-      slug: "products/balances-scales/bench-scales",
-    },
+    title: "Промышленные",
     groups: [
       {
         title: "Промышленные весы",
-        links: [
-          {
-            title: "Платформенные весы",
-            slug: "products/balances-scales/bench-scales",
-          },
-          {
-            title: "Счетные весы",
-            slug: "products/balances-scales/counting-scales",
-          },
-          {
-            title: "Напольные весы",
-            slug: "products/balances-scales/floor-scales",
-          },
-        ],
+        items: ["bench-scales", "counting-scales", "floor-scales"],
       },
       {
         title: "Весы",
-        links: [
-          {
-            title: "Прецизионные весы",
-            slug: "products/balances-scales/precision-balances",
-          },
-          { title: "Портативные весы", slug: "portable-scales-2" },
-        ],
+        items: ["precision-balances", "portable-scales-2"],
       },
-      {
-        title: "Лабораторное оборудование",
-        links: [
-          {
-            title: "Верхнеприводные мешалки",
-            slug: "products/equipment/overhead-stirrers",
-          },
-        ],
-      },
-      {
-        title: "Компоненты весов",
-        links: [
-          {
-            title: "Терминалы",
-            slug: "products/balances-scales/indicators",
-          },
-        ],
-      },
-      {
-        title: "Анализаторы влажности",
-        links: [
-          {
-            title: "Анализаторы влагосодержания",
-            slug: "products/balances-scales/moisture-analyzers",
-          },
-        ],
-      },
+      { title: "Лабораторное оборудование", items: ["overhead-stirrers"] },
+      { title: "Компоненты весов", items: ["indicators"] },
+      { title: "Анализаторы влажности", items: ["moisture-analyzers"] },
     ],
   },
   {
-    title: "Торговые",
     slug: "retail",
-    promo: {
-      title: "Scout™ SJX",
-      slug: "products/balances-scales/jewelry-scales",
-    },
+    title: "Торговые",
     groups: [
-      {
-        title: "Весы",
-        links: [
-          {
-            title: "Ювелирные весы",
-            slug: "products/balances-scales/jewelry-scales",
-          },
-        ],
-      },
+      { title: "Ювелирные весы", items: ["jewelry-scales"] },
+      { title: "Платформенные весы", items: ["bench-scales"] },
     ],
   },
   {
-    title: "Пищевая промышленность",
     slug: "food",
-    promo: {
-      title: "Valor™ 4000",
-      slug: "products/balances-scales/bench-scales",
-    },
+    title: "Пищевая промышленность",
     groups: [
       {
-        title: "Весы",
-        links: [
-          {
-            title: "Платформенные весы",
-            slug: "products/balances-scales/bench-scales",
-          },
-          {
-            title: "Анализаторы влагосодержания",
-            slug: "products/balances-scales/moisture-analyzers",
-          },
+        title: "Лабораторные весы",
+        items: [
+          "analytical-balances",
+          "precision-balances",
+          "portable-scales-2",
         ],
+      },
+      {
+        title: "Промышленные весы",
+        items: ["bench-scales", "counting-scales", "floor-scales"],
+      },
+      { title: "Анализаторы влажности", items: ["moisture-analyzers"] },
+      {
+        title: "Лабораторные контрольно-измерительные приборы",
+        items: ["water-analysis"],
       },
     ],
   },
   {
-    title: "Образование",
     slug: "education",
+    title: "Образование",
     groups: [
       {
-        title: "Весы",
-        links: [
-          {
-            title: "Механические весы",
-            slug: "products/balances-scales/mechanical-scales",
-          },
+        title: "Взвешивание",
+        items: [
+          "analytical-balances",
+          "precision-balances",
+          "portable-scales-2",
+          "mechanical-scales",
         ],
+      },
+      { title: "Лабораторное оборудование", items: LAB_EQUIPMENT },
+      {
+        title: "Лабораторные контрольно-измерительные приборы",
+        items: ["water-analysis"],
       },
     ],
   },
 ];
 
-// ----------------------------------------------------------------------------
-// Routing helpers
-// ----------------------------------------------------------------------------
-
-/** Build an internal href from a catalog slug, always rooted under /products. */
-export function hrefForSlug(slug: string): string {
-  const clean = slug.replace(/^\/+/, "");
-  return clean.startsWith("products/") ? `/${clean}` : `/products/${clean}`;
-}
-
-/** Path segments after the leading "products/" prefix. */
-export function productPathSegments(slug: string): string[] {
-  const clean = slug.replace(/^\/+/, "").replace(/^products\//, "");
-  return clean.split("/").filter(Boolean);
-}
-
-/** Every unique subcategory link across all segments. */
-export function allLinks(): Link[] {
-  const seen = new Set<string>();
-  const out: Link[] = [];
-  for (const segment of catalog) {
-    for (const group of segment.groups) {
-      for (const link of group.links) {
-        if (!seen.has(link.slug)) {
-          seen.add(link.slug);
-          out.push(link);
-        }
-      }
-    }
-  }
-  return out;
-}
-
-/** Human-readable title for a known slug, or null if unknown. */
+/** Название подкатегории по slug'у (для хлебных крошек и заголовков). */
 export function titleForSlug(slug: string): string | null {
-  for (const link of allLinks()) {
-    if (productPathSegments(link.slug).join("/") === slug) return link.title;
-  }
-  return null;
-}
-
-/** Find a segment by its slug. */
-export function segmentBySlug(slug: string): Segment | undefined {
-  return catalog.find((s) => s.slug === slug);
-}
-
-type Params = { category?: string; subcategory?: string };
-
-/** All unique route params derived from the catalog, by depth. */
-export function catalogRouteParams(): {
-  categories: { category: string }[];
-  subcategories: { category: string; subcategory: string }[];
-} {
-  const categories = new Set<string>();
-  const subcategories = new Map<string, Params>();
-
-  for (const link of allLinks()) {
-    const seg = productPathSegments(link.slug);
-    if (seg[0]) categories.add(seg[0]);
-    if (seg[0] && seg[1]) {
-      subcategories.set(`${seg[0]}/${seg[1]}`, {
-        category: seg[0],
-        subcategory: seg[1],
-      });
-    }
-  }
-
-  return {
-    categories: [...categories].map((category) => ({ category })),
-    subcategories: [...subcategories.values()].map((p) => ({
-      category: p.category!,
-      subcategory: p.subcategory!,
-    })),
-  };
-}
-
-/** True if the given category segment exists in the catalog. */
-export function isKnownCategory(category: string): boolean {
-  return catalogRouteParams().categories.some((c) => c.category === category);
-}
-
-/** True if the given category/subcategory pair exists in the catalog. */
-export function isKnownSubcategory(
-  category: string,
-  subcategory: string,
-): boolean {
-  return catalogRouteParams().subcategories.some(
-    (s) => s.category === category && s.subcategory === subcategory,
-  );
-}
-
-/** RU labels for top-level category path segments (not titled in the catalog). */
-const CATEGORY_LABELS: Record<string, string> = {
-  "balances-scales": "Весы и весовое оборудование",
-  equipment: "Лабораторное оборудование",
-  "instruments-equipment": "Контрольно-измерительные приборы",
-  weights: "Гири",
-  "portable-scales-2": "Портативные весы",
-};
-
-/** Pretty label for a raw route slug (de-kebab) with a catalog title fallback. */
-export function labelForSegment(slug: string): string {
-  const known = titleForSlug(slug);
-  if (known) return known;
-  if (CATEGORY_LABELS[slug]) return CATEGORY_LABELS[slug];
-  const decoded = decodeURIComponent(slug);
-  return decoded
-    .split("-")
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
-
-/** True if any catalog link path starts with the given segments (valid node). */
-export function isKnownPathPrefix(segments: string[]): boolean {
-  if (segments.length === 0) return true;
-  return allLinks().some((link) => {
-    const seg = productPathSegments(link.slug);
-    return (
-      seg.length >= segments.length &&
-      segments.every((s, i) => s === seg[i])
-    );
-  });
-}
-
-/** Immediate child catalog nodes one level below the given path. */
-export function childCatalogLinks(
-  segments: string[],
-): { title: string; href: string }[] {
-  const seen = new Set<string>();
-  const out: { title: string; href: string }[] = [];
-  for (const link of allLinks()) {
-    const seg = productPathSegments(link.slug);
-    const isUnder =
-      seg.length > segments.length &&
-      segments.every((s, i) => s === seg[i]);
-    if (!isUnder) continue;
-    const childSegments = seg.slice(0, segments.length + 1);
-    const key = childSegments.join("/");
-    if (seen.has(key)) continue;
-    seen.add(key);
-    // If the child is the link's own leaf, use its catalog title.
-    const title =
-      childSegments.length === seg.length
-        ? link.title
-        : labelForSegment(childSegments[childSegments.length - 1]);
-    out.push({ title, href: `/products/${key}` });
-  }
-  return out;
+  return subcategories.find((s) => s.slug === slug)?.title ?? null;
 }

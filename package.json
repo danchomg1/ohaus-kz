@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "migrate": "tsx scripts/migrate.ts",
-    "import-images": "tsx scripts/import-cdn-images.ts"
+    "import-images": "tsx scripts/import-cdn-images.ts",
+    "seed-nav": "tsx scripts/seed-nav.ts"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",
