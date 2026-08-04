@@ -14,6 +14,8 @@ export default function ProductDetail({
   crumbs: Crumb[];
 }) {
   const features = product.features ?? [];
+  const specs = product.specs ?? [];
+  const details = product.details ?? [];
   const documents = product.documents ?? [];
   const description = product.description ?? [];
   const hasDescription = description.length > 0;
@@ -41,27 +43,6 @@ export default function ProductDetail({
             </p>
           ) : null}
 
-          {product.specs && product.specs.length > 0 ? (
-            <>
-              <h2 className="mb-3 mt-8 font-heading text-lg font-bold text-ohaus-ink">
-                Характеристики
-              </h2>
-              <dl className="divide-y divide-ohaus-line border-y border-ohaus-line">
-                {product.specs.map((spec, i) => (
-                  <div
-                    key={i}
-                    className="grid grid-cols-2 gap-4 py-3 text-sm"
-                  >
-                    <dt className="text-ohaus-muted">{spec.label}</dt>
-                    <dd className="font-semibold text-ohaus-ink">
-                      {spec.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </>
-          ) : null}
-
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/quote">Узнать цену</Button>
             <Button href="/contacts" variant="outline">
@@ -73,7 +54,9 @@ export default function ProductDetail({
 
       <ProductTabs
         features={features}
+        specs={specs}
         documents={documents}
+        details={details}
         description={hasDescription ? <PortableBody value={description} /> : null}
       />
 

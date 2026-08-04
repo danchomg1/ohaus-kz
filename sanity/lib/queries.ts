@@ -28,6 +28,7 @@ export type SubcategoryListing = {
 } | null;
 
 export type Spec = { label: string; value: string };
+export type Detail = { label: string; value: string };
 export type Feature = { text?: string; image?: SanityImage };
 export type DocFile = {
   title: string;
@@ -42,6 +43,7 @@ export type ProductDetailData = {
   summary?: string;
   gallery?: SanityImage[];
   specs?: Spec[];
+  details?: Detail[];
   features?: Feature[];
   documents?: DocFile[];
   description?: unknown[];
@@ -120,7 +122,7 @@ export function getProductParams(): Promise<
 export function getProduct(slug: string): Promise<ProductDetailData> {
   return client.fetch(
     `*[_type=="product" && slug.current==$slug][0]{
-      name, series, summary, gallery, specs,
+      name, series, summary, gallery, specs, details,
       features[]{ text, image },
       "documents": documents[]{ title, "url": file.asset->url, "ext": file.asset->extension, "size": file.asset->size },
       description,

@@ -4,9 +4,9 @@ import { useState } from "react";
 import { FileText, Download } from "lucide-react";
 import SanityImg from "@/components/ui/SanityImg";
 import { cn } from "@/lib/utils";
-import type { Feature, DocFile } from "@/sanity/lib/queries";
+import type { Feature, DocFile, Spec, Detail } from "@/sanity/lib/queries";
 
-type TabKey = "features" | "documents" | "description";
+type TabKey = "features" | "specs" | "documents" | "description";
 
 function formatSize(bytes?: number): string {
   if (!bytes) return "";
@@ -14,28 +14,48 @@ function formatSize(bytes?: number): string {
   return `${Math.round(bytes / 1024)} КБ`;
 }
 
+/** Список «параметр — значение»: одинаково для характеристик и описания. */
+function PairList({ rows }: { rows: { label: string; value: string }[] }) {
+  return (
+    <dl className="max-w-3xl divide-y divide-ohaus-line border-y border-ohaus-line">
+      {rows.map((r, i) => (
+        <div key={i} className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+          <dt className="text-sm text-ohaus-muted">{r.label}</dt>
+          <dd className="text-sm font-semibold text-ohaus-ink sm:col-span-2">
+            {r.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 export default function ProductTabs({
   features,
+  specs,
   documents,
+  details,
   description,
 }: {
   features: Feature[];
+  specs: Spec[];
   documents: DocFile[];
+  details: Detail[];
   description: React.ReactNode;
 }) {
+  // «Документы» показываем всегда: раздел предусмотрен, файлы добавят позже.
   const tabs: { key: TabKey; label: string; show: boolean }[] = [
     { key: "features", label: "Особенности", show: features.length > 0 },
-    { key: "documents", label: "Документы", show: documents.length > 0 },
+    { key: "specs", label: "Характеристики", show: specs.length > 0 },
+    { key: "documents", label: "Документы", show: true },
     {
       key: "description",
       label: "Описание",
-      show: Boolean(description),
+      show: details.length > 0 || Boolean(description),
     },
   ];
   const available = tabs.filter((t) => t.show);
-  const [active, setActive] = useState<TabKey>(
-    available[0]?.key ?? "features",
-  );
+  const [active, setActive] = useState<TabKey>(available[0]?.key ?? "documents");
 
   if (available.length === 0) return null;
 
@@ -65,8 +85,8 @@ export default function ProductTabs({
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f, i) => (
               <div key={i} className="text-center">
-                <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden bg-ohaus-bg-soft">
-                  {f.image?.asset ? (
+                {f.image?.asset ? (
+                  <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden bg-ohaus-bg-soft">
                     <SanityImg
                       image={f.image}
                       alt={f.text || ""}
@@ -74,8 +94,8 @@ export default function ProductTabs({
                       className="object-contain"
                       width={400}
                     />
-                  ) : null}
-                </div>
+                  </div>
+                ) : null}
                 {f.text ? (
                   <p className="mt-3 text-sm leading-relaxed text-ohaus-ink/90">
                     {f.text}
@@ -86,36 +106,48 @@ export default function ProductTabs({
           </div>
         ) : null}
 
+        {active === "specs" ? <PairList rows={specs} /> : null}
+
         {active === "documents" ? (
-          <ul className="divide-y divide-ohaus-line border-y border-ohaus-line">
-            {documents.map((d, i) => (
-              <li key={i}>
-                <a
-                  href={d.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 py-3 transition-colors hover:text-ohaus-red"
-                >
-                  <FileText
-                    className="h-5 w-5 flex-shrink-0 text-ohaus-red"
-                    aria-hidden="true"
-                  />
-                  <span className="flex-1 text-sm">{d.title}</span>
-                  <span className="text-xs uppercase text-ohaus-muted">
-                    {d.ext} {formatSize(d.size)}
-                  </span>
-                  <Download
-                    className="h-4 w-4 text-ohaus-muted"
-                    aria-hidden="true"
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
+          documents.length > 0 ? (
+            <ul className="max-w-3xl divide-y divide-ohaus-line border-y border-ohaus-line">
+              {documents.map((d, i) => (
+                <li key={i}>
+                  <a
+                    href={d.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 py-3 transition-colors hover:text-ohaus-red"
+                  >
+                    <FileText
+                      className="h-5 w-5 flex-shrink-0 text-ohaus-red"
+                      aria-hidden="true"
+                    />
+                    <span className="flex-1 text-sm">{d.title}</span>
+                    <span className="text-xs uppercase text-ohaus-muted">
+                      {d.ext} {formatSize(d.size)}
+                    </span>
+                    <Download
+                      className="h-4 w-4 text-ohaus-muted"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-ohaus-muted">
+              Документация по этой модели готовится. Запросите её у нас —
+              пришлём в ответ на обращение.
+            </p>
+          )
         ) : null}
 
         {active === "description" ? (
-          <div className="max-w-3xl">{description}</div>
+          <div className="space-y-6">
+            {description ? <div className="max-w-3xl">{description}</div> : null}
+            {details.length > 0 ? <PairList rows={details} /> : null}
+          </div>
         ) : null}
       </div>
     </section>

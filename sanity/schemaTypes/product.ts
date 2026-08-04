@@ -152,12 +152,33 @@ export const product = defineType({
 
     // --- Вкладка «Описание» ---
     defineField({
-      name: "description",
-      title: "Описание",
+      name: "details",
+      title: "Параметры (вкладка «Описание»)",
       type: "array",
       group: "description",
       description:
-        "Свободный текст: заголовки, абзацы, картинки, видео в любом порядке.",
+        "Пары «параметр — значение» из вкладки «Описание» на ru.ohaus.com: " +
+        "режимы применения, дисплей, эксплуатация, материалы конструкции и т.п. " +
+        "Не путать с «Характеристиками» — там ключевые цифры модели.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "detail",
+          fields: [
+            { name: "label", title: "Параметр", type: "string" },
+            { name: "value", title: "Значение", type: "text", rows: 2 },
+          ],
+          preview: { select: { title: "label", subtitle: "value" } },
+        }),
+      ],
+    }),
+    defineField({
+      name: "description",
+      title: "Описание (свободный текст)",
+      type: "array",
+      group: "description",
+      description:
+        "Необязательный текст над параметрами: заголовки, абзацы, картинки, видео.",
       of: [
         defineArrayMember({ type: "block" }),
         defineArrayMember({

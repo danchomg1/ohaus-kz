@@ -9,7 +9,9 @@
     "lint": "next lint",
     "migrate": "tsx scripts/migrate.ts",
     "import-images": "tsx scripts/import-cdn-images.ts",
-    "seed-nav": "tsx scripts/seed-nav.ts"
+    "seed-nav": "tsx scripts/seed-nav.ts",
+    "scrape": "tsx scripts/scrape-ohaus.ts",
+    "import-content": "tsx scripts/import-content.ts"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",
