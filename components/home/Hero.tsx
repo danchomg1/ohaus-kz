@@ -10,115 +10,120 @@ import type { HeroSlide } from "@/sanity/lib/queries";
 /** Слайд по умолчанию может ссылаться на файл из /public вместо картинки Sanity. */
 type Slide = HeroSlide & { src?: string };
 
+// Фоны сняты под баннер 1920×560 — держим этот формат при подготовке новых.
 const DEFAULT_SLIDES: Slide[] = [
   {
     series: "Explorer™ EX",
     title: "Аналитические и прецизионные весы Explorer™",
     subtitle: "Высокая точность и производительность для лаборатории.",
     ctaHref: "/products/analytical-balances",
-    src: "/home/hero-explorer.jpg",
+    src: "/home/hero-bg-explorer.jpg",
   },
   {
     series: "Adventurer™ AX",
     title: "Лабораторные весы Adventurer™",
     subtitle: "Универсальные весы для рутинных задач взвешивания.",
     ctaHref: "/products/precision-balances",
-    src: "/home/hero-adventurer.jpg",
+    src: "/home/hero-bg-adventurer.jpg",
   },
   {
     series: "Pioneer™ PX",
     title: "Весы Pioneer™ для базовых задач",
     subtitle: "Надёжность и простота для образования и производства.",
     ctaHref: "/products/precision-balances",
-    src: "/home/hero-pioneer.jpg",
-  },
-  {
-    series: "Scout™",
-    title: "Портативные весы Scout™",
-    subtitle: "Компактные и прочные весы для работы где угодно.",
-    ctaHref: "/products/portable-scales-2",
-    src: "/home/hero-scout.jpg",
+    src: "/home/hero-bg-pioneer.jpg",
   },
 ];
 
 export default function Hero({ slides }: { slides?: HeroSlide[] }) {
   const data: Slide[] = slides && slides.length > 0 ? slides : DEFAULT_SLIDES;
   const [active, setActive] = useState(0);
-  const slide = data[Math.min(active, data.length - 1)];
-  // Фирменные снимки OHAUS сняты на белом фоне, поэтому показываем их не
-  // подложкой, а карточкой рядом с текстом — иначе тёмный баннер выцветает
-  // и белый заголовок теряет контраст.
-  const photo = slide.image?.asset
-    ? urlFor(slide.image as any)
-        .width(600)
-        .fit("max")
-        .url()
-    : (slide.src ?? null);
 
   return (
-    <section aria-label="Главный баннер" className="bg-ohaus-gray-dark text-white">
-      <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px]">
-          <div className="relative flex min-h-[340px] flex-col justify-center overflow-hidden py-10 lg:min-h-[440px] lg:py-16">
-            <div
-              className="absolute inset-0 bg-gradient-to-br from-ohaus-gray-dark to-black/60"
-              aria-hidden="true"
+    <section aria-label="Главный баннер" className="bg-ohaus-gray-dark">
+      {/*
+        Баннер во всю ширину экрана. Пропорция 24/7 — это ровно 1920×560, при
+        ней кадр виден целиком. На узких экранах включается минимальная высота,
+        иначе баннер становится слишком низким для заголовка и кнопки.
+      */}
+      <div className="relative min-h-[480px] w-full lg:aspect-[24/7] lg:min-h-[400px]">
+        {data.map((slide, i) => {
+          const photo = slide.image?.asset
+            ? urlFor(slide.image as never)
+                .width(1920)
+                .fit("max")
+                .url()
+            : (slide.src ?? null);
+          if (!photo) return null;
+          return (
+            <Image
+              key={i}
+              src={photo}
+              alt=""
+              fill
+              sizes="100vw"
+              priority={i === 0}
+              className={`object-cover transition-opacity duration-500 ${
+                i === active ? "opacity-100" : "opacity-0"
+              }`}
             />
+          );
+        })}
 
-            <div className="relative grid items-center gap-8 sm:grid-cols-[1fr_auto] lg:pr-10">
-              <div className="max-w-xl">
-                {slide.series ? (
-                  <span className="font-heading text-sm font-bold uppercase tracking-widest text-ohaus-red">
-                    {slide.series}
-                  </span>
-                ) : null}
-                <h1 className="mt-3 font-heading text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-                  {slide.title}
-                </h1>
-                {slide.subtitle ? (
-                  <p className="mt-4 max-w-md text-base text-white/80">
-                    {slide.subtitle}
-                  </p>
-                ) : null}
-                <Button
-                  href={slide.ctaHref || "/products"}
-                  size="lg"
-                  className="mt-6"
-                >
-                  Подробнее
-                </Button>
-              </div>
+        {/* Затемнение: слева плотное — под текст, справа почти прозрачное. */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/15 to-transparent"
+          aria-hidden="true"
+        />
+        {/* Подложка под вкладками, чтобы они читались на светлом кадре. */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/45 to-transparent"
+          aria-hidden="true"
+        />
 
-              {photo ? (
-                <div className="relative aspect-square w-[190px] justify-self-center border border-white/10 bg-white p-3 sm:w-[210px] lg:w-[270px]">
-                  <Image
-                    src={photo}
-                    alt={slide.title || "Оборудование OHAUS"}
-                    fill
-                    sizes="(max-width: 640px) 190px, (max-width: 1024px) 210px, 270px"
-                    className="object-contain"
-                    priority
-                  />
-                </div>
+        <div className="absolute inset-0 flex items-center pb-16 pt-8 sm:pb-20">
+          <div className="container-site">
+            <div className="max-w-xl rounded-md border border-white/20 bg-black/40 p-6 shadow-xl backdrop-blur-lg sm:p-8">
+              {data[active].series ? (
+                <span className="font-heading text-sm font-bold uppercase tracking-widest text-white drop-shadow">
+                  {data[active].series}
+                </span>
               ) : null}
+              <h1 className="mt-3 font-heading text-2xl font-bold leading-tight text-white drop-shadow sm:text-3xl lg:text-4xl">
+                {data[active].title}
+              </h1>
+              {data[active].subtitle ? (
+                <p className="mt-3 text-sm text-white/90 drop-shadow sm:text-base">
+                  {data[active].subtitle}
+                </p>
+              ) : null}
+              <Button
+                href={data[active].ctaHref || "/products"}
+                size="lg"
+                className="mt-6"
+              >
+                Подробнее
+              </Button>
             </div>
           </div>
+        </div>
 
-          <div
-            role="tablist"
-            aria-label="Серии весов"
-            aria-orientation="vertical"
-            className="flex flex-row divide-x divide-white/10 border-t border-white/10 lg:flex-col lg:divide-x-0 lg:divide-y lg:border-l lg:border-t-0"
-          >
-            {data.map((s, i) => (
-              <div key={i} className="flex-1">
+        <div className="absolute inset-x-0 bottom-0">
+          <div className="container-site">
+            <div
+              role="tablist"
+              aria-label="Серии весов"
+              className="flex gap-px"
+            >
+              {data.map((s, i) => (
                 <SeriesTab
+                  key={i}
                   title={s.series || s.title || `Слайд ${i + 1}`}
                   active={i === active}
                   onSelect={() => setActive(i)}
                 />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

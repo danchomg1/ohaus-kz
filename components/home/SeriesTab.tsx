@@ -8,8 +8,15 @@ type SeriesTabProps = {
   onSelect: () => void;
 };
 
-/** Vertical series tab used in the Hero slider. */
-export default function SeriesTab({ title, active, onSelect }: SeriesTabProps) {
+/**
+ * Вкладка серии в главном баннере. Лежит поверх фотографии, поэтому фон
+ * полупрозрачный с размытием — кадр под ней остаётся виден.
+ */
+export default function SeriesTab({
+  title,
+  active,
+  onSelect,
+}: SeriesTabProps) {
   return (
     <button
       type="button"
@@ -17,10 +24,10 @@ export default function SeriesTab({ title, active, onSelect }: SeriesTabProps) {
       aria-selected={active}
       onClick={onSelect}
       className={cn(
-        "w-full border-l-4 px-5 py-4 text-left font-heading text-sm font-bold uppercase tracking-wide transition-colors",
+        "flex-1 border-t-2 px-3 py-3.5 text-center font-heading text-xs font-bold uppercase tracking-wide backdrop-blur-md transition-colors sm:px-5 sm:text-sm",
         active
-          ? "border-ohaus-red bg-ohaus-gray-dark text-white"
-          : "border-transparent bg-white/80 text-ohaus-ink hover:bg-white",
+          ? "border-ohaus-red bg-black/55 text-white"
+          : "border-white/25 bg-black/30 text-white/70 hover:bg-black/45 hover:text-white",
       )}
     >
       {title}
