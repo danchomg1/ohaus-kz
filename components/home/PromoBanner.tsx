@@ -1,8 +1,11 @@
-import { ImageIcon } from "lucide-react";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import SanityImg from "@/components/ui/SanityImg";
 import type { HomepageData } from "@/sanity/lib/queries";
+
+/** Групповой снимок линейки OHAUS — запасной вариант, пока картинку не задали в Studio. */
+const DEFAULT_IMAGE = "/home/promo.jpg";
 
 type PromoProps = {
   title?: string;
@@ -33,16 +36,23 @@ export default function PromoBanner({
             </Button>
           </div>
 
-          <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden bg-gradient-to-br from-ohaus-red to-ohaus-red-dark">
+          {/* Снимки OHAUS сняты на белом, поэтому фон белый, а картинка вписывается целиком. */}
+          <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden border border-ohaus-line bg-white">
             {image?.asset ? (
               <SanityImg
                 image={image}
                 alt={title || "Акция"}
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-contain p-4"
               />
             ) : (
-              <ImageIcon className="h-16 w-16 text-white/30" aria-hidden="true" />
+              <Image
+                src={DEFAULT_IMAGE}
+                alt={title || "Оборудование OHAUS"}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain p-4"
+              />
             )}
           </div>
         </div>

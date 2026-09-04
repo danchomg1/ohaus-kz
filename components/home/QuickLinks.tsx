@@ -1,19 +1,39 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SanityImg from "@/components/ui/SanityImg";
 import type { QuickLinkData } from "@/sanity/lib/queries";
 
-const DEFAULT_LINKS: QuickLinkData[] = [
-  { title: "Центрифуги Frontier™ 5000", href: "/products/centrifuges" },
-  { title: "Напольные весы", href: "/products/floor-scales" },
-  { title: "Анализаторы влагосодержания", href: "/products/moisture-analyzers" },
-  { title: "Калибровочные гири", href: "/products/calibration-weights" },
+/** Ссылка по умолчанию может ссылаться на файл из /public вместо картинки Sanity. */
+type QuickLink = QuickLinkData & { src?: string };
+
+const DEFAULT_LINKS: QuickLink[] = [
+  {
+    title: "Центрифуги Frontier™ 5000",
+    href: "/products/centrifuges",
+    src: "/home/quick-centrifuges.jpg",
+  },
+  {
+    title: "Напольные весы",
+    href: "/products/floor-scales",
+    src: "/home/quick-floor-scales.jpg",
+  },
+  {
+    title: "Анализаторы влагосодержания",
+    href: "/products/moisture-analyzers",
+    src: "/home/quick-moisture.jpg",
+  },
+  {
+    title: "Калибровочные гири",
+    href: "/products/calibration-weights",
+    src: "/home/quick-weights.jpg",
+  },
 ];
 
 export default function QuickLinks({ links }: { links?: QuickLinkData[] }) {
-  const data = links && links.length > 0 ? links : DEFAULT_LINKS;
+  const data: QuickLink[] = links && links.length > 0 ? links : DEFAULT_LINKS;
 
   return (
     <section aria-label="Ссылки быстрого доступа" className="py-12 lg:py-16">
@@ -31,6 +51,14 @@ export default function QuickLinks({ links }: { links?: QuickLinkData[] }) {
                   <SanityImg
                     image={item.image}
                     alt={item.title || ""}
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-contain p-2"
+                  />
+                ) : item.src ? (
+                  <Image
+                    src={item.src}
+                    alt={item.title || ""}
+                    fill
                     sizes="(max-width: 1024px) 50vw, 25vw"
                     className="object-contain p-2"
                   />
