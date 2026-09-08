@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Breadcrumbs from "@/components/layout/Breadcrumbs";
+import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
 import ProductCard from "@/components/ui/ProductCard";
-import { getSubcategorySlugs, getSubcategoryListing } from "@/sanity/lib/queries";
+import {
+  getSubcategorySlugs,
+  getSubcategoryListing,
+} from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
@@ -35,29 +37,35 @@ export default async function SubcategoryPage({
   if (!data) notFound();
 
   return (
-    <Container>
-      <Breadcrumbs
-        items={[{ title: "Продукты", href: "/products" }, { title: data.title }]}
+    <>
+      <PageHero
+        eyebrow="Каталог"
+        title={data.title}
+        crumbs={[
+          { title: "Продукты", href: "/products" },
+          { title: data.title },
+        ]}
+        image={PAGE_BG.catalog}
       />
-      <SectionHeading as="h1" title={data.title} />
-
-      {data.products.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 pb-12 sm:grid-cols-3 lg:grid-cols-4 lg:gap-6">
-          {data.products.map((p) => (
-            <ProductCard
-              key={p.slug}
-              name={p.name}
-              series={p.series}
-              image={p.image}
-              href={`/products/${data.slug}/${p.slug}`}
-            />
-          ))}
+      <Container>
+        <div className="py-12 lg:py-16">
+          {data.products.length > 0 ? (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+              {data.products.map((p) => (
+                <ProductCard
+                  key={p.slug}
+                  name={p.name}
+                  series={p.series}
+                  image={p.image}
+                  href={`/products/${data.slug}/${p.slug}`}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-ohaus-muted">В этом разделе пока нет моделей.</p>
+          )}
         </div>
-      ) : (
-        <p className="pb-12 text-ohaus-muted">
-          В этом разделе пока нет моделей.
-        </p>
-      )}
-    </Container>
+      </Container>
+    </>
   );
 }

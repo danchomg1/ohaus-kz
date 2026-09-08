@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Breadcrumbs from "@/components/layout/Breadcrumbs";
+import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
 import { getSiteSettings } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
@@ -31,37 +30,38 @@ export default async function ContactsPage() {
   ];
 
   return (
-    <Container>
-      <Breadcrumbs items={[{ title: "Свяжитесь с нами" }]} />
-      <SectionHeading
-        as="h1"
+    <>
+      <PageHero
         title="Свяжитесь с нами"
         subtitle="Контакты представительства OHAUS в Казахстане."
+        crumbs={[{ title: "Свяжитесь с нами" }]}
+        image={PAGE_BG.company}
       />
+      <Container>
+        <div className="grid grid-cols-1 gap-8 py-12 lg:grid-cols-2 lg:py-16">
+          <ul className="space-y-5">
+            {details.map(({ icon: Icon, label, value }) => (
+              <li key={label} className="flex gap-4">
+                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-ohaus-bg-soft text-ohaus-red">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="font-heading text-sm font-bold text-ohaus-ink">
+                    {label}
+                  </p>
+                  <p className="whitespace-pre-line text-sm text-ohaus-muted">
+                    {value}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
 
-      <div className="grid grid-cols-1 gap-8 pb-16 lg:grid-cols-2">
-        <ul className="space-y-5">
-          {details.map(({ icon: Icon, label, value }) => (
-            <li key={label} className="flex gap-4">
-              <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-ohaus-bg-soft text-ohaus-red">
-                <Icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <p className="font-heading text-sm font-bold text-ohaus-ink">
-                  {label}
-                </p>
-                <p className="whitespace-pre-line text-sm text-ohaus-muted">
-                  {value}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex min-h-[260px] items-center justify-center border border-ohaus-line bg-ohaus-bg-soft">
-          <MapPin className="h-10 w-10 text-ohaus-line" aria-hidden="true" />
+          <div className="flex min-h-[260px] items-center justify-center border border-ohaus-line bg-ohaus-bg-soft">
+            <MapPin className="h-10 w-10 text-ohaus-line" aria-hidden="true" />
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }

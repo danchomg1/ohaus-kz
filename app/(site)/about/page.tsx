@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Breadcrumbs from "@/components/layout/Breadcrumbs";
+import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
 import Skeleton from "@/components/ui/Skeleton";
 
 export const metadata: Metadata = {
@@ -11,22 +10,24 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <Container className="max-w-3xl">
-      <Breadcrumbs items={[{ title: "О компании" }]} />
-      <SectionHeading
-        as="h1"
+    <>
+      <PageHero
         title="О компании"
         subtitle="OHAUS Kazakhstan — официальное представительство OHAUS."
+        crumbs={[{ title: "О компании" }]}
+        image={PAGE_BG.company}
       />
-      <div className="space-y-3 pb-16">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <Skeleton
-            key={i}
-            className="h-4"
-            style={{ width: `${72 + ((i * 5) % 28)}%` }}
-          />
-        ))}
-      </div>
-    </Container>
+      <Container className="max-w-3xl">
+        <div className="space-y-3 py-12 lg:py-16">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <Skeleton
+              key={i}
+              className="h-4"
+              style={{ width: `${72 + ((i * 5) % 28)}%` }}
+            />
+          ))}
+        </div>
+      </Container>
+    </>
   );
 }
