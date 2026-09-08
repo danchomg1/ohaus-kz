@@ -9,11 +9,14 @@ import {
 } from "lucide-react";
 import Container from "@/components/ui/Container";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import Skeleton from "@/components/ui/Skeleton";
 
 export const metadata: Metadata = {
   title: "Поддержка",
-  description: "Центр поддержки OHAUS Kazakhstan.",
+  description:
+    "Поддержка OHAUS в Казахстане: документация и руководства, программы и драйверы, сервис и ремонт, калибровка и поверка, обучение работе с оборудованием.",
+  alternates: { canonical: "/support" },
 };
 
 const TILES = [
@@ -28,6 +31,7 @@ const TILES = [
 export default function SupportPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ title: "Поддержка" }]} />
       <PageHero
         title="Поддержка"
         subtitle="Ресурсы поддержки появятся на следующем этапе."

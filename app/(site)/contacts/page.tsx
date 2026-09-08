@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import Container from "@/components/ui/Container";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
+import { BreadcrumbJsonLd, LocalBusinessJsonLd } from "@/components/seo/JsonLd";
 import { getSiteSettings } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Свяжитесь с нами",
-  description: "Контакты представительства OHAUS в Казахстане.",
+  description:
+    "Контакты официального представительства OHAUS в Казахстане: адрес, телефон, электронная почта и часы работы. Поможем подобрать оборудование под задачу.",
+  alternates: { canonical: "/contacts" },
 };
 
 export default async function ContactsPage() {
@@ -31,6 +34,13 @@ export default async function ContactsPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd items={[{ title: "Свяжитесь с нами" }]} />
+      <LocalBusinessJsonLd
+        phone={s?.phone}
+        email={s?.email}
+        address={s?.address}
+        hours={s?.workingHours}
+      />
       <PageHero
         title="Свяжитесь с нами"
         subtitle="Контакты представительства OHAUS в Казахстане."

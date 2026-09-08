@@ -89,9 +89,11 @@ export default function Hero({ slides }: { slides?: HeroSlide[] }) {
                   {data[active].series}
                 </span>
               ) : null}
-              <h1 className="mt-3 font-heading text-2xl font-bold leading-tight text-white drop-shadow sm:text-3xl lg:text-4xl">
+              {/* H2, а не H1: главный заголовок страницы задан в app/(site)/page.tsx
+                  и не меняется при переключении слайдов. */}
+              <h2 className="mt-3 font-heading text-2xl font-bold leading-tight text-white drop-shadow sm:text-3xl lg:text-4xl">
                 {data[active].title}
-              </h1>
+              </h2>
               {data[active].subtitle ? (
                 <p className="mt-3 text-sm text-white/90 drop-shadow sm:text-base">
                   {data[active].subtitle}

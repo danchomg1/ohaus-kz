@@ -19,7 +19,10 @@ function PairList({ rows }: { rows: { label: string; value: string }[] }) {
   return (
     <dl className="max-w-3xl divide-y divide-ohaus-line border-y border-ohaus-line">
       {rows.map((r, i) => (
-        <div key={i} className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+        <div
+          key={i}
+          className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4"
+        >
           <dt className="text-sm text-ohaus-muted">{r.label}</dt>
           <dd className="text-sm font-semibold text-ohaus-ink sm:col-span-2">
             {r.value}
@@ -31,12 +34,14 @@ function PairList({ rows }: { rows: { label: string; value: string }[] }) {
 }
 
 export default function ProductTabs({
+  productName,
   features,
   specs,
   documents,
   details,
   description,
 }: {
+  productName: string;
   features: Feature[];
   specs: Spec[];
   documents: DocFile[];
@@ -55,18 +60,28 @@ export default function ProductTabs({
     },
   ];
   const available = tabs.filter((t) => t.show);
-  const [active, setActive] = useState<TabKey>(available[0]?.key ?? "documents");
+  const [active, setActive] = useState<TabKey>(
+    available[0]?.key ?? "documents",
+  );
 
   if (available.length === 0) return null;
 
   return (
     <section className="mt-12">
       {/* Полоса вкладок */}
-      <div className="flex flex-wrap gap-6 border-b border-ohaus-line bg-ohaus-gray-dark px-4">
+      <div
+        role="tablist"
+        aria-label="Информация о товаре"
+        className="flex flex-wrap gap-6 border-b border-ohaus-line bg-ohaus-gray-dark px-4"
+      >
         {available.map((t) => (
           <button
             key={t.key}
             type="button"
+            role="tab"
+            id={`tab-${t.key}`}
+            aria-selected={active === t.key}
+            aria-controls={`panel-${t.key}`}
             onClick={() => setActive(t.key)}
             className={cn(
               "-mb-px border-b-2 py-4 font-heading text-sm font-bold uppercase tracking-wide transition-colors",
@@ -80,8 +95,19 @@ export default function ProductTabs({
         ))}
       </div>
 
+      {/*
+        Все панели всегда в разметке, неактивные скрыты атрибутом hidden.
+        Раньше неактивная вкладка не рендерилась вовсе — из-за этого
+        характеристики и вкладка «Описание» не попадали в HTML страницы
+        и не индексировались поисковиками.
+      */}
       <div className="py-8">
-        {active === "features" ? (
+        <div
+          role="tabpanel"
+          id="panel-features"
+          aria-labelledby="tab-features"
+          hidden={active !== "features"}
+        >
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f, i) => (
               <div key={i} className="text-center">
@@ -89,7 +115,7 @@ export default function ProductTabs({
                   <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden bg-ohaus-bg-soft">
                     <SanityImg
                       image={f.image}
-                      alt={f.text || ""}
+                      alt={`${productName} — особенность ${i + 1}`}
                       sizes="300px"
                       className="object-contain"
                       width={400}
@@ -97,19 +123,31 @@ export default function ProductTabs({
                   </div>
                 ) : null}
                 {f.text ? (
-                  <p className="mt-3 text-sm leading-relaxed text-ohaus-ink/90">
+                  <p className="text-ohaus-ink/90 mt-3 text-sm leading-relaxed">
                     {f.text}
                   </p>
                 ) : null}
               </div>
             ))}
           </div>
-        ) : null}
+        </div>
 
-        {active === "specs" ? <PairList rows={specs} /> : null}
+        <div
+          role="tabpanel"
+          id="panel-specs"
+          aria-labelledby="tab-specs"
+          hidden={active !== "specs"}
+        >
+          <PairList rows={specs} />
+        </div>
 
-        {active === "documents" ? (
-          documents.length > 0 ? (
+        <div
+          role="tabpanel"
+          id="panel-documents"
+          aria-labelledby="tab-documents"
+          hidden={active !== "documents"}
+        >
+          {documents.length > 0 ? (
             <ul className="max-w-3xl divide-y divide-ohaus-line border-y border-ohaus-line">
               {documents.map((d, i) => (
                 <li key={i}>
@@ -140,15 +178,22 @@ export default function ProductTabs({
               Документация по этой модели готовится. Запросите её у нас —
               пришлём в ответ на обращение.
             </p>
-          )
-        ) : null}
+          )}
+        </div>
 
-        {active === "description" ? (
+        <div
+          role="tabpanel"
+          id="panel-description"
+          aria-labelledby="tab-description"
+          hidden={active !== "description"}
+        >
           <div className="space-y-6">
-            {description ? <div className="max-w-3xl">{description}</div> : null}
+            {description ? (
+              <div className="max-w-3xl">{description}</div>
+            ) : null}
             {details.length > 0 ? <PairList rows={details} /> : null}
           </div>
-        ) : null}
+        </div>
       </div>
     </section>
   );

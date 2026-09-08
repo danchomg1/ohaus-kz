@@ -109,6 +109,49 @@ export function getSubcategoryListing(
   );
 }
 
+/** Адреса и даты правок для карты сайта. */
+export type SitemapEntry = { path: string; updatedAt?: string };
+
+export async function getSitemapEntries(): Promise<SitemapEntry[]> {
+  const [products, subcategories, news] = await Promise.all([
+    client.fetch<{ slug: string; sub?: string; updatedAt: string }[]>(
+      `*[_type=="product" && defined(slug.current) && defined(subcategory->slug.current)]{
+        "slug": slug.current,
+        "sub": subcategory->slug.current,
+        "updatedAt": _updatedAt
+      }`,
+      {},
+      opts,
+    ),
+    client.fetch<{ slug: string; updatedAt: string }[]>(
+      `*[_type=="subcategory" && defined(slug.current)]{
+        "slug": slug.current, "updatedAt": _updatedAt
+      }`,
+      {},
+      opts,
+    ),
+    client.fetch<{ slug: string; updatedAt: string }[]>(
+      `*[_type=="newsArticle" && defined(slug.current)]{
+        "slug": slug.current, "updatedAt": _updatedAt
+      }`,
+      {},
+      opts,
+    ),
+  ]);
+
+  return [
+    ...subcategories.map((s) => ({
+      path: `/products/${s.slug}`,
+      updatedAt: s.updatedAt,
+    })),
+    ...products.map((p) => ({
+      path: `/products/${p.sub}/${p.slug}`,
+      updatedAt: p.updatedAt,
+    })),
+    ...news.map((n) => ({ path: `/news/${n.slug}`, updatedAt: n.updatedAt })),
+  ];
+}
+
 export function getProductParams(): Promise<
   { subcategory: string; product: string }[]
 > {
@@ -160,7 +203,11 @@ export type HeroSlide = {
   ctaHref?: string;
   image?: SanityImage;
 };
-export type QuickLinkData = { title?: string; href?: string; image?: SanityImage };
+export type QuickLinkData = {
+  title?: string;
+  href?: string;
+  image?: SanityImage;
+};
 export type HomepageData = {
   heroSlides?: HeroSlide[];
   quickLinks?: QuickLinkData[];
@@ -189,6 +236,7 @@ export type NewsCard = {
 export type NewsArticle = {
   title: string;
   date?: string;
+  excerpt?: string;
   cover?: SanityImage;
   body?: unknown[];
 } | null;
@@ -207,7 +255,7 @@ export function getNewsSlugs(): Promise<string[]> {
 
 export function getNewsArticle(slug: string): Promise<NewsArticle> {
   return client.fetch(
-    `*[_type=="newsArticle" && slug.current==$slug][0]{ title, date, cover, body }`,
+    `*[_type=="newsArticle" && slug.current==$slug][0]{ title, date, excerpt, cover, body }`,
     { slug },
     opts,
   );

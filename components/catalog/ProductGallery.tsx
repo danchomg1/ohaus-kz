@@ -7,7 +7,11 @@ import { urlFor } from "@/sanity/lib/image";
 import { cn } from "@/lib/utils";
 import type { SanityImage } from "@/sanity/lib/queries";
 
-const url = (img: SanityImage, w: number) => urlFor(img as any).width(w).fit("max").url();
+const url = (img: SanityImage, w: number) =>
+  urlFor(img as any)
+    .width(w)
+    .fit("max")
+    .url();
 
 /** Галерея товара из Sanity: большое фото + миниатюры. */
 export default function ProductGallery({
@@ -60,7 +64,7 @@ export default function ProductGallery({
             >
               <Image
                 src={url(img, 200)}
-                alt=""
+                alt={`${alt} — фото ${i + 1}`}
                 fill
                 sizes="100px"
                 className="object-contain p-2"

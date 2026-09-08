@@ -7,6 +7,9 @@ import SearchBox from "@/components/layout/SearchBox";
 export const metadata: Metadata = {
   title: "Поиск",
   description: "Поиск по сайту OHAUS Kazakhstan.",
+  // Страницы результатов плодят бесконечные адреса вида /search?q=… —
+  // это мусор в индексе, который расходует лимит обхода.
+  robots: { index: false, follow: true },
 };
 
 export default async function SearchPage({

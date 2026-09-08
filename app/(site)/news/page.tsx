@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ImageIcon } from "lucide-react";
 import Container from "@/components/ui/Container";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import SanityImg from "@/components/ui/SanityImg";
 import { getNewsList } from "@/sanity/lib/queries";
 
@@ -10,7 +11,9 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Новости",
-  description: "Новости и события OHAUS Kazakhstan.",
+  description:
+    "Новости OHAUS Kazakhstan: новинки весового и лабораторного оборудования, изменения в модельном ряду, выставки и мероприятия в Казахстане.",
+  alternates: { canonical: "/news" },
 };
 
 export default async function NewsPage() {
@@ -18,6 +21,7 @@ export default async function NewsPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd items={[{ title: "Новости" }]} />
       <PageHero
         title="Новости"
         subtitle="Новости и события OHAUS Kazakhstan."

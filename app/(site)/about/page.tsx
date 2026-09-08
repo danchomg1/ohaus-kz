@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import Skeleton from "@/components/ui/Skeleton";
 
 export const metadata: Metadata = {
   title: "О компании",
-  description: "OHAUS Kazakhstan — официальное представительство OHAUS.",
+  description:
+    "OHAUS Kazakhstan — официальное представительство OHAUS в Казахстане: поставка весового и лабораторного оборудования, гарантия производителя, сервис и поверка.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ title: "О компании" }]} />
       <PageHero
         title="О компании"
         subtitle="OHAUS Kazakhstan — официальное представительство OHAUS."

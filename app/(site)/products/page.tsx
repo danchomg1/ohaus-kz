@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { getCatalogOverview } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Все продукты",
-  description: "Полный каталог продукции OHAUS по сегментам рынка.",
+  description:
+    "Каталог OHAUS в Казахстане: лабораторные и промышленные весы, анализаторы влажности, центрифуги, шейкеры, мешалки, гири и электроды — по сегментам рынка.",
+  alternates: { canonical: "/products" },
 };
 
 export default async function ProductsPage() {
@@ -16,6 +19,7 @@ export default async function ProductsPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd items={[{ title: "Продукты" }]} />
       <PageHero
         title="Все продукты"
         subtitle="Каталог OHAUS по сегментам рынка."

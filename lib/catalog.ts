@@ -54,6 +54,7 @@ const LAB_EQUIPMENT = [
   "overhead-stirrers",
   "hotplates-stirrers",
   "labjaws-clamps-supports",
+  "equipment-accessories",
 ];
 
 export const menu: MenuSegment[] = [

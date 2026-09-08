@@ -53,11 +53,14 @@ export default function ProductDetail({
       </div>
 
       <ProductTabs
+        productName={product.name}
         features={features}
         specs={specs}
         documents={documents}
         details={details}
-        description={hasDescription ? <PortableBody value={description} /> : null}
+        description={
+          hasDescription ? <PortableBody value={description} /> : null
+        }
       />
 
       <div className="pb-16" />

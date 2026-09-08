@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
 import PortableBody from "@/components/catalog/PortableBody";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { absoluteUrl, metaDescription } from "@/lib/site";
 import { urlFor } from "@/sanity/lib/image";
 import { getNewsSlugs, getNewsArticle } from "@/sanity/lib/queries";
 
@@ -22,7 +24,33 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const a = await getNewsArticle(slug);
-  return { title: a?.title ?? "Новость" };
+  if (!a) return { title: "Новость" };
+
+  const path = `/news/${slug}`;
+  const description = metaDescription(a.excerpt || a.title);
+  const cover = a.cover?.asset
+    ? urlFor(a.cover as never)
+        .width(1200)
+        .height(630)
+        .fit("crop")
+        .url()
+    : undefined;
+
+  return {
+    title: a.title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "article",
+      title: a.title,
+      description,
+      url: absoluteUrl(path),
+      ...(a.date ? { publishedTime: a.date } : {}),
+      ...(cover
+        ? { images: [{ url: cover, width: 1200, height: 630, alt: a.title }] }
+        : {}),
+    },
+  };
 }
 
 export default async function NewsArticlePage({
@@ -44,6 +72,9 @@ export default async function NewsArticlePage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[{ title: "Новости", href: "/news" }, { title: article.title }]}
+      />
       <PageHero
         eyebrow={article.date}
         title={article.title}

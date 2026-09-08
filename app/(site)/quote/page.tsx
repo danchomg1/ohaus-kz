@@ -6,7 +6,10 @@ import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Узнать цены",
-  description: "Список запроса цен OHAUS Kazakhstan.",
+  description:
+    "Запрос коммерческого предложения на оборудование OHAUS в Казахстане.",
+  // Форма — не посадочная страница, в индексе ей делать нечего.
+  robots: { index: false, follow: true },
 };
 
 const field =
