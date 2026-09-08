@@ -5,15 +5,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+/** Логотип из /public. Используется, пока в настройках сайта не задан свой. */
+const DEFAULT_LOGO = "/logo.png";
+
 type LogoProps = {
   className?: string;
-  /** URL логотипа из настроек сайта (Sanity). Если нет — текстовый вариант. */
+  /** URL логотипа из настроек сайта (Sanity). Если нет — файл из /public. */
   src?: string;
 };
 
 export default function Logo({ className, src }: LogoProps) {
   const [error, setError] = useState(false);
-  const showImage = Boolean(src) && !error;
+  const source = src || DEFAULT_LOGO;
 
   return (
     <Link
@@ -21,18 +24,8 @@ export default function Logo({ className, src }: LogoProps) {
       aria-label="OHAUS Kazakhstan — на главную"
       className={cn("inline-flex items-center", className)}
     >
-      {showImage ? (
-        <span className="relative block h-8 w-[150px] sm:h-9">
-          <Image
-            src={src as string}
-            alt="OHAUS Kazakhstan"
-            fill
-            priority
-            className="object-contain object-left"
-            onError={() => setError(true)}
-          />
-        </span>
-      ) : (
+      {error ? (
+        // Файл не отдался — показываем текстовый вариант, а не битую картинку.
         <svg
           viewBox="0 0 168 44"
           role="img"
@@ -51,6 +44,20 @@ export default function Logo({ className, src }: LogoProps) {
             OHAUS
           </text>
         </svg>
+      ) : (
+        // Пропорции блока совпадают с логотипом (142×39), чтобы не оставалось
+        // пустого поля справа и ссылка не ловила клики мимо картинки.
+        <span className="relative block h-8 w-[117px] sm:h-9 sm:w-[131px]">
+          <Image
+            src={source}
+            alt="OHAUS Kazakhstan"
+            fill
+            priority
+            sizes="131px"
+            className="object-contain object-left"
+            onError={() => setError(true)}
+          />
+        </span>
       )}
       <span className="sr-only">OHAUS Kazakhstan</span>
     </Link>
