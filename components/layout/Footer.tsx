@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { resolveContacts } from "@/lib/contacts";
 import type { SiteSettings } from "@/sanity/lib/queries";
 
 const COLUMNS: { title: string; links: { title: string; href: string }[] }[] = [
@@ -15,7 +16,7 @@ const COLUMNS: { title: string; links: { title: string; href: string }[] }[] = [
     title: "Поддержка",
     links: [
       { title: "Центр поддержки", href: "/support" },
-      { title: "Узнать цены", href: "/quote" },
+      { title: "Оставить заявку", href: "/request" },
       { title: "Поиск", href: "/search" },
     ],
   },
@@ -29,9 +30,7 @@ const COLUMNS: { title: string; links: { title: string; href: string }[] }[] = [
 ];
 
 export default function Footer({ settings }: { settings?: SiteSettings }) {
-  const addressLines = (
-    settings?.address || "Казахстан, [индекс], [город],\n[улица, офис]"
-  ).split("\n");
+  const c = resolveContacts(settings);
   return (
     <footer className="mt-16 border-t border-ohaus-line bg-ohaus-bg-soft">
       <div className="container-site py-12">
@@ -56,37 +55,58 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
             </div>
           ))}
 
-          {/* Representative office address (placeholder) */}
+          {/* Контакты представительства */}
           <div>
             <h2 className="mb-3 font-heading text-sm font-bold uppercase tracking-wide text-ohaus-ink">
-              Адрес
+              {c.city
+                ? `Офис в ${c.city === "Астана" ? "Астане" : c.city}`
+                : "Адрес"}
             </h2>
-            <address className="flex gap-2 not-italic">
-              <MapPin
-                className="mt-0.5 h-4 w-4 flex-shrink-0 text-ohaus-red"
-                aria-hidden="true"
-              />
-              <span className="font-sans text-sm leading-relaxed text-ohaus-muted">
-                {settings?.companyName || "OHAUS Kazakhstan"}
-                {addressLines.map((line, i) => (
-                  <span key={i}>
-                    <br />
-                    {line}
+            <address className="space-y-2 font-sans text-sm not-italic leading-relaxed text-ohaus-muted">
+              <p className="flex gap-2">
+                <MapPin
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-ohaus-red"
+                  aria-hidden="true"
+                />
+                <span>
+                  <span className="font-semibold text-ohaus-ink">
+                    {c.companyName}
                   </span>
-                ))}
-                {settings?.phone ? (
-                  <>
-                    <br />
-                    {settings.phone}
-                  </>
-                ) : null}
-                {settings?.email ? (
-                  <>
-                    <br />
-                    {settings.email}
-                  </>
-                ) : null}
-              </span>
+                  <br />
+                  {c.address}
+                </span>
+              </p>
+              <p className="flex gap-2">
+                <Phone
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-ohaus-red"
+                  aria-hidden="true"
+                />
+                <a
+                  href={c.phoneHref}
+                  className="transition-colors hover:text-ohaus-red"
+                >
+                  {c.phone}
+                </a>
+              </p>
+              <p className="flex gap-2">
+                <Mail
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-ohaus-red"
+                  aria-hidden="true"
+                />
+                <a
+                  href={`mailto:${c.email}`}
+                  className="transition-colors hover:text-ohaus-red"
+                >
+                  {c.email}
+                </a>
+              </p>
+              <p className="flex gap-2">
+                <Clock
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-ohaus-red"
+                  aria-hidden="true"
+                />
+                <span>{c.workingHours}</span>
+              </p>
             </address>
           </div>
         </div>

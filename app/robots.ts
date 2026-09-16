@@ -15,7 +15,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/studio", // панель управления контентом
           "/search", // результаты поиска плодят бесконечные адреса
-          "/quote", // форма запроса цен
+          "/request", // форма заявки
         ],
       },
     ],

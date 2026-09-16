@@ -1,3 +1,4 @@
+import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getNav, getSiteSettings } from "@/sanity/lib/queries";
@@ -8,10 +9,7 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [segments, settings] = await Promise.all([
-    getNav(),
-    getSiteSettings(),
-  ]);
+  const [segments, settings] = await Promise.all([getNav(), getSiteSettings()]);
 
   const logoUrl = settings?.logo?.asset
     ? urlFor(settings.logo as never)
@@ -21,6 +19,7 @@ export default async function SiteLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
+      <TopBar settings={settings} />
       <Header segments={segments} logoUrl={logoUrl} />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />

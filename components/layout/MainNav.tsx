@@ -13,7 +13,7 @@ type MainNavProps = {
 const MORE_LINKS = [
   { title: "О компании", href: "/about" },
   { title: "Свяжитесь с нами", href: "/contacts" },
-  { title: "Узнать цены", href: "/quote" },
+  { title: "Оставить заявку", href: "/request" },
 ];
 
 const navItem =

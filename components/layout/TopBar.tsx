@@ -1,41 +1,60 @@
 import Link from "next/link";
-import { Globe, Tag, LogIn } from "lucide-react";
+import { Phone, Mail, Send, LogIn } from "lucide-react";
+import { resolveContacts } from "@/lib/contacts";
+import type { SiteSettings } from "@/sanity/lib/queries";
 
 /**
- * Thin red utility bar above the header.
- * Left: region/language switch (placeholder). Right: quote + dealer login.
+ * Тонкая красная полоса над шапкой: слева контакты, справа заявка и вход
+ * для дилеров. На узких экранах остаются телефон и заявка.
  */
-export default function TopBar() {
+export default function TopBar({ settings }: { settings?: SiteSettings }) {
+  const c = resolveContacts(settings);
+  const dealerUrl = settings?.dealerUrl || "https://dealer.ohaus.com";
+
   return (
     <div className="bg-ohaus-red text-white">
-      <div className="container-site flex h-9 items-center justify-between text-xs sm:text-[13px]">
-        <button
-          type="button"
-          className="inline-flex items-center gap-1.5 font-sans text-white/90 transition-colors hover:text-white"
-        >
-          <Globe className="h-3.5 w-3.5" aria-hidden="true" />
-          <span>Русский</span>
-          <span className="text-white/70">(Изменить)</span>
-        </button>
+      <div className="container-site flex h-9 items-center justify-between gap-4 text-xs sm:text-[13px]">
+        <div className="flex min-w-0 items-center gap-4">
+          <a
+            href={c.phoneHref}
+            className="inline-flex items-center gap-1.5 whitespace-nowrap font-sans font-semibold text-white transition-colors hover:text-white/80"
+          >
+            <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>{c.phone}</span>
+          </a>
+          <span
+            className="hidden h-3.5 w-px bg-white/30 md:block"
+            aria-hidden="true"
+          />
+          <a
+            href={`mailto:${c.email}`}
+            className="hidden items-center gap-1.5 font-sans text-white/90 transition-colors hover:text-white md:inline-flex"
+          >
+            <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>{c.email}</span>
+          </a>
+        </div>
 
         <nav aria-label="Дополнительно" className="flex items-center gap-4">
           <Link
-            href="/quote"
-            className="inline-flex items-center gap-1.5 font-sans text-white/90 transition-colors hover:text-white"
+            href="/request"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap font-sans text-white/90 transition-colors hover:text-white"
           >
-            <Tag className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>Узнать цены</span>
+            <Send className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>Оставить заявку</span>
           </Link>
-          <span className="h-3.5 w-px bg-white/30" aria-hidden="true" />
+          <span
+            className="hidden h-3.5 w-px bg-white/30 sm:block"
+            aria-hidden="true"
+          />
           <a
-            href="https://dealer.ohaus.com"
+            href={dealerUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-sans text-white/90 transition-colors hover:text-white"
+            className="hidden items-center gap-1.5 font-sans text-white/90 transition-colors hover:text-white sm:inline-flex"
           >
             <LogIn className="h-3.5 w-3.5" aria-hidden="true" />
-            <span className="hidden sm:inline">Вход для дилеров</span>
-            <span className="sm:hidden">Дилеры</span>
+            <span>Вход для дилеров</span>
           </a>
         </nav>
       </div>

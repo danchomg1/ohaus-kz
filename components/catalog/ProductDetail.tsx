@@ -44,7 +44,12 @@ export default function ProductDetail({
           ) : null}
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/quote">Узнать цену</Button>
+            {/* Название товара уходит в форму — менеджер сразу видит, о чём заявка. */}
+            <Button
+              href={`/request?product=${encodeURIComponent(product.name)}`}
+            >
+              Оставить заявку
+            </Button>
             <Button href="/contacts" variant="outline">
               Связаться
             </Button>

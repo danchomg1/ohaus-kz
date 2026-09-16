@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero";
 import QuickLinks from "@/components/home/QuickLinks";
 import PromoBanner from "@/components/home/PromoBanner";
 import { OrganizationJsonLd } from "@/components/seo/JsonLd";
+import { resolveContacts } from "@/lib/contacts";
 import { getHomepage, getSiteSettings } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
@@ -12,12 +13,14 @@ export default async function HomePage() {
     getSiteSettings(),
   ]);
 
+  const c = resolveContacts(settings);
+
   return (
     <>
       <OrganizationJsonLd
-        phone={settings?.phone}
-        email={settings?.email}
-        address={settings?.address}
+        phone={c.phone}
+        email={c.email}
+        address={c.fullAddress}
       />
 
       {/*
