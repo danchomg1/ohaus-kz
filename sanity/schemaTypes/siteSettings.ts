@@ -39,11 +39,6 @@ export const siteSettings = defineType({
       title: "Часы работы",
       type: "string",
     }),
-    defineField({
-      name: "dealerUrl",
-      title: "Ссылка «Вход для дилеров»",
-      type: "url",
-    }),
   ],
   preview: { prepare: () => ({ title: "Настройки сайта" }) },
 });

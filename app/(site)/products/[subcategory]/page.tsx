@@ -32,11 +32,11 @@ function listingDescription(data: NonNullable<SubcategoryListing>): string {
   const count = data.products.length;
   if (!count) {
     return metaDescription(
-      `${data.title} OHAUS в Казахстане. Подбор оборудования, поставка, сервис и поверка.`,
+      `${data.title} OHAUS в Казахстане. Подбор оборудования, поставка и сервис.`,
     );
   }
   return metaDescription(
-    `${data.title} OHAUS в Казахстане — ${count} ${plural(count)}: ${names}. Поставка, сервис и поверка от официального представительства.`,
+    `${data.title} OHAUS в Казахстане — ${count} ${plural(count)}: ${names}. Поставка и сервис от официального представительства.`,
   );
 }
 

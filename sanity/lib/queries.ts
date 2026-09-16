@@ -184,12 +184,11 @@ export type SiteSettings = {
   phone?: string;
   email?: string;
   workingHours?: string;
-  dealerUrl?: string;
 } | null;
 
 export function getSiteSettings(): Promise<SiteSettings> {
   return client.fetch(
-    `*[_id=="siteSettings"][0]{ logo, companyName, address, phone, email, workingHours, dealerUrl }`,
+    `*[_id=="siteSettings"][0]{ logo, companyName, address, phone, email, workingHours }`,
     {},
     opts,
   );

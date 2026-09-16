@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  LifeBuoy,
-  FileText,
-  Download,
-  Wrench,
-  GraduationCap,
-  BadgeCheck,
-} from "lucide-react";
+import { FileText, Wrench, GraduationCap } from "lucide-react";
 import Container from "@/components/ui/Container";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
@@ -15,17 +8,14 @@ import Skeleton from "@/components/ui/Skeleton";
 export const metadata: Metadata = {
   title: "Поддержка",
   description:
-    "Поддержка OHAUS в Казахстане: документация и руководства, программы и драйверы, сервис и ремонт, калибровка и поверка, обучение работе с оборудованием.",
+    "Поддержка OHAUS в Казахстане: документация и руководства по оборудованию, сервис и ремонт, обучение работе с весами и лабораторными приборами.",
   alternates: { canonical: "/support" },
 };
 
 const TILES = [
   { icon: FileText, title: "Документация" },
-  { icon: Download, title: "Загрузки ПО и драйверов" },
   { icon: Wrench, title: "Сервис и ремонт" },
-  { icon: BadgeCheck, title: "Калибровка и поверка" },
   { icon: GraduationCap, title: "Обучение" },
-  { icon: LifeBuoy, title: "Часто задаваемые вопросы" },
 ];
 
 export default function SupportPage() {

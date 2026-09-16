@@ -7,7 +7,7 @@ import Skeleton from "@/components/ui/Skeleton";
 export const metadata: Metadata = {
   title: "О компании",
   description:
-    "OHAUS Kazakhstan — официальное представительство OHAUS в Казахстане: поставка весового и лабораторного оборудования, гарантия производителя, сервис и поверка.",
+    "OHAUS Kazakhstan — официальное представительство OHAUS в Казахстане: поставка весового и лабораторного оборудования, гарантия производителя и сервис.",
   alternates: { canonical: "/about" },
 };
 

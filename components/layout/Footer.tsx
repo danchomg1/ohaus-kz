@@ -16,7 +16,6 @@ const COLUMNS: { title: string; links: { title: string; href: string }[] }[] = [
     title: "Поддержка",
     links: [
       { title: "Центр поддержки", href: "/support" },
-      { title: "Оставить заявку", href: "/request" },
       { title: "Поиск", href: "/search" },
     ],
   },
@@ -24,7 +23,7 @@ const COLUMNS: { title: string; links: { title: string; href: string }[] }[] = [
     title: "Свяжитесь с нами",
     links: [
       { title: "Контакты", href: "/contacts" },
-      { title: "Вход для дилеров", href: "https://dealer.ohaus.com" },
+      { title: "Оставить заявку", href: "/request" },
     ],
   },
 ];
