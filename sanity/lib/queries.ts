@@ -123,8 +123,11 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
       {},
       opts,
     ),
+    // Разделы без товаров закрыты от индексации (см. страницу раздела) —
+    // в карте сайта им тоже не место, иначе она противоречит noindex.
     client.fetch<{ slug: string; updatedAt: string }[]>(
-      `*[_type=="subcategory" && defined(slug.current)]{
+      `*[_type=="subcategory" && defined(slug.current)
+        && count(*[_type=="product" && references(^._id)]) > 0]{
         "slug": slug.current, "updatedAt": _updatedAt
       }`,
       {},
