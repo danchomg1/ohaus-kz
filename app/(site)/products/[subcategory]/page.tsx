@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { Send } from "lucide-react";
 import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
 import PageHero, { PAGE_BG } from "@/components/layout/PageHero";
 import ProductCard from "@/components/ui/ProductCard";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { sectionCopy } from "@/lib/catalog-copy";
 import { absoluteUrl, metaDescription } from "@/lib/site";
 import {
   getSubcategorySlugs,
@@ -21,10 +24,13 @@ export async function generateStaticParams() {
 type Params = { subcategory: string };
 
 /**
- * У раздела нет своего текста в CMS, поэтому описание собираем из названия
- * и моделей внутри: так у каждого раздела свой сниппет, а не общий текст сайта.
+ * Описание для выдачи: сначала текст раздела (из Studio или из
+ * lib/catalog-copy.ts), иначе — собранное из названия и моделей внутри.
  */
 function listingDescription(data: NonNullable<SubcategoryListing>): string {
+  const intro = data.description?.trim() || sectionCopy(data.slug)?.intro;
+  if (intro) return metaDescription(intro);
+
   const names = data.products
     .slice(0, 3)
     .map((p) => p.name)
@@ -87,6 +93,9 @@ export default async function SubcategoryPage({
   const data = await getSubcategoryListing(subcategory);
   if (!data) notFound();
 
+  const copy = sectionCopy(data.slug);
+  // Текст из Studio перекрывает текст по умолчанию.
+  const intro = data.description?.trim() || copy?.intro;
   const crumbs = [
     { title: "Продукты", href: "/products" },
     { title: data.title },
@@ -103,6 +112,12 @@ export default async function SubcategoryPage({
       />
       <Container>
         <div className="py-12 lg:py-16">
+          {intro ? (
+            <p className="text-ohaus-ink/90 mb-10 max-w-3xl text-base leading-relaxed">
+              {intro}
+            </p>
+          ) : null}
+
           {data.products.length > 0 ? (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-6">
               {data.products.map((p) => (
@@ -118,6 +133,43 @@ export default async function SubcategoryPage({
           ) : (
             <p className="text-ohaus-muted">В этом разделе пока нет моделей.</p>
           )}
+
+          {copy?.choosing?.length ? (
+            <section className="mt-14 max-w-3xl">
+              <h2 className="font-heading text-xl font-bold text-ohaus-ink sm:text-2xl">
+                Как выбрать
+              </h2>
+              <span
+                className="mt-3 block h-1 w-12 bg-ohaus-red"
+                aria-hidden="true"
+              />
+              <ul className="mt-5 space-y-3">
+                {copy.choosing.map((item, i) => (
+                  <li
+                    key={i}
+                    className="text-ohaus-ink/90 border-l-2 border-ohaus-line pl-4 text-base leading-relaxed"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
+          <div className="mt-12 flex flex-col items-start gap-4 border border-ohaus-line bg-ohaus-bg-soft p-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-heading text-base font-bold text-ohaus-ink">
+                Не уверены, какая модель подойдёт?
+              </p>
+              <p className="mt-1 text-sm text-ohaus-muted">
+                Опишите задачу — подберём оборудование и пришлём предложение.
+              </p>
+            </div>
+            <Button href="/request" className="flex-shrink-0">
+              <Send className="h-4 w-4" aria-hidden="true" />
+              Оставить заявку
+            </Button>
+          </div>
         </div>
       </Container>
     </>

@@ -25,6 +25,14 @@ export const subcategory = defineType({
       options: { source: "title", maxLength: 96 },
       validation: (r) => r.required(),
     }),
+    defineField({
+      name: "description",
+      title: "Описание раздела",
+      type: "text",
+      rows: 6,
+      description:
+        "Абзац под заголовком, над списком товаров. Если пусто — берётся текст по умолчанию из lib/catalog-copy.ts.",
+    }),
   ],
   preview: {
     select: { title: "title", subtitle: "slug.current" },

@@ -24,6 +24,7 @@ export type ProductCardData = {
 export type SubcategoryListing = {
   title: string;
   slug: string;
+  description?: string;
   products: ProductCardData[];
 } | null;
 
@@ -99,7 +100,7 @@ export function getSubcategoryListing(
 ): Promise<SubcategoryListing> {
   return client.fetch(
     `*[_type=="subcategory" && slug.current==$slug][0]{
-      title, "slug": slug.current,
+      title, "slug": slug.current, description,
       "products": *[_type=="product" && references(^._id)]|order(order asc){
         name, "slug": slug.current, series, "image": gallery[0]
       }
