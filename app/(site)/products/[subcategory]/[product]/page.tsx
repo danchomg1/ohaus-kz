@@ -93,7 +93,7 @@ export default async function ProductPage({
         series={data.series}
         path={path}
       />
-      <ProductDetail product={data} crumbs={crumbs} />
+      <ProductDetail product={data} slug={product} crumbs={crumbs} />
     </>
   );
 }

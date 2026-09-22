@@ -8,9 +8,12 @@ import type { ProductDetailData } from "@/sanity/lib/queries";
 
 export default function ProductDetail({
   product,
+  slug,
   crumbs,
 }: {
   product: NonNullable<ProductDetailData>;
+  /** Slug товара — по нему подбираются запасные картинки особенностей. */
+  slug?: string;
   crumbs: Crumb[];
 }) {
   const features = product.features ?? [];
@@ -59,6 +62,7 @@ export default function ProductDetail({
 
       <ProductTabs
         productName={product.name}
+        productSlug={slug}
         features={features}
         specs={specs}
         documents={documents}

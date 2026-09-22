@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { FileText, Download } from "lucide-react";
 import SanityImg from "@/components/ui/SanityImg";
+import { featureFallback } from "@/lib/feature-images";
 import { cn } from "@/lib/utils";
 import type { Feature, DocFile, Spec, Detail } from "@/sanity/lib/queries";
 
@@ -35,6 +37,7 @@ function PairList({ rows }: { rows: { label: string; value: string }[] }) {
 
 export default function ProductTabs({
   productName,
+  productSlug,
   features,
   specs,
   documents,
@@ -42,6 +45,7 @@ export default function ProductTabs({
   description,
 }: {
   productName: string;
+  productSlug?: string;
   features: Feature[];
   specs: Spec[];
   documents: DocFile[];
@@ -109,26 +113,39 @@ export default function ProductTabs({
           hidden={active !== "features"}
         >
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f, i) => (
-              <div key={i} className="text-center">
-                {f.image?.asset ? (
-                  <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden bg-ohaus-bg-soft">
-                    <SanityImg
-                      image={f.image}
-                      alt={`${productName} — особенность ${i + 1}`}
-                      sizes="300px"
-                      className="object-contain"
-                      width={400}
-                    />
-                  </div>
-                ) : null}
-                {f.text ? (
-                  <p className="text-ohaus-ink/90 mt-3 text-sm leading-relaxed">
-                    {f.text}
-                  </p>
-                ) : null}
-              </div>
-            ))}
+            {features.map((f, i) => {
+              const fallback = featureFallback(productSlug, i);
+              return (
+                <div key={i} className="text-center">
+                  {f.image?.asset ? (
+                    <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden bg-ohaus-bg-soft">
+                      <SanityImg
+                        image={f.image}
+                        alt={`${productName} — особенность ${i + 1}`}
+                        sizes="300px"
+                        className="object-contain"
+                        width={400}
+                      />
+                    </div>
+                  ) : fallback ? (
+                    <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden bg-ohaus-bg-soft">
+                      <Image
+                        src={fallback}
+                        alt={`${productName} — особенность ${i + 1}`}
+                        fill
+                        sizes="300px"
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : null}
+                  {f.text ? (
+                    <p className="text-ohaus-ink/90 mt-3 text-sm leading-relaxed">
+                      {f.text}
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
           </div>
         </div>
 
