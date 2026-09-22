@@ -35,8 +35,8 @@ export const OHAUS_URLS: Record<string, string> = {
 
   // Механические весы
   "triple-beam-700": "/ru-ru/triplebeam700series-12",
-  "triple-beam-dial-1600": "/ru-ru/triplebeamdial-o-gram1600series-12",
-  "dial-cent-o-gram-300": "/ru-ru/dial-o-gramandcent-o-gram300series-15",
+  "triple-beam-dial-o-gram-1600": "/ru-ru/triplebeamdial-o-gram1600series-12",
+  "dial-o-gram-cent-o-gram-300": "/ru-ru/dial-o-gramandcent-o-gram300series-15",
   "harvard-trip": "/ru-ru/harvardtrip-12",
 
   // Ювелирные весы
@@ -145,8 +145,8 @@ export const OHAUS_URLS: Record<string, string> = {
   // Аксессуары для оборудования
   "homogenizer-accessories": "/ru-ru/homogenizersaccessories-17",
   "shaker-accessories": "/ru-ru/shakeraccessories-15",
-  "vortexer-accessories": "/ru-ru/vortexeraccessories-15",
-  "dry-block-heater-accessories": "/ru-ru/dryblockheateraccessories-15",
+  "vortex-accessories": "/ru-ru/vortexeraccessories-15",
+  "dry-block-accessories": "/ru-ru/dryblockheateraccessories-15",
 };
 
 /** Категории каталога на их сайте — источник списка семейств для сверки. */

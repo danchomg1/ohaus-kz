@@ -443,7 +443,7 @@ export const products: Product[] = [
   },
   {
     listing: ["balances-scales", "mechanical-scales"],
-    model: "triple-beam-dial-1600",
+    model: "triple-beam-dial-o-gram-1600",
     name: "Весы Triple Beam Dial-O-Gram™ серии 1600",
     series: "dial-o-gram",
     seriesLabel: "Dial-O-Gram™",
@@ -459,7 +459,7 @@ export const products: Product[] = [
   },
   {
     listing: ["balances-scales", "mechanical-scales"],
-    model: "dial-cent-o-gram-300",
+    model: "dial-o-gram-cent-o-gram-300",
     name: "Весы Dial-O-Gram™ и Cent-O-Gram™ серии 300",
     series: "dial-o-gram",
     seriesLabel: "Dial-O-Gram™ / Cent-O-Gram™",
@@ -2397,7 +2397,7 @@ export const products: Product[] = [
   },
   {
     listing: ["equipment", "equipment-accessories"],
-    model: "vortexer-accessories",
+    model: "vortex-accessories",
     name: "Принадлежности для вортексов",
     series: "accessories",
     seriesLabel: "Принадлежности",
@@ -2419,7 +2419,7 @@ export const products: Product[] = [
   },
   {
     listing: ["equipment", "equipment-accessories"],
-    model: "dry-block-heater-accessories",
+    model: "dry-block-accessories",
     name: "Принадлежности для твердотельных термостатов",
     series: "accessories",
     seriesLabel: "Принадлежности",

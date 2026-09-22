@@ -194,8 +194,8 @@ frontier-5000-multi-pro5.jpg
 
 ### public/products/mechanical-scales/
 - `triple-beam-700.jpg` — Весы Triple Beam™ серии 700
-- `triple-beam-dial-1600.jpg` — Весы Triple Beam Dial-O-Gram™ серии 1600
-- `dial-cent-o-gram-300.jpg` — Весы Dial-O-Gram™ и Cent-O-Gram™ серии 300
+- `triple-beam-dial-o-gram-1600.jpg` — Весы Triple Beam Dial-O-Gram™ серии 1600
+- `dial-o-gram-cent-o-gram-300.jpg` — Весы Dial-O-Gram™ и Cent-O-Gram™ серии 300
 - `harvard-trip.jpg` — Весы Harvard Trip™
 
 ### public/products/labjaws-clamps-supports/
@@ -204,8 +204,8 @@ frontier-5000-multi-pro5.jpg
 ### public/products/equipment-accessories/
 - `homogenizer-accessories.jpg` — Принадлежности для гомогенизаторов
 - `shaker-accessories.jpg` — Принадлежности для шейкеров
-- `vortexer-accessories.jpg` — Принадлежности для вортексов
-- `dry-block-heater-accessories.jpg` — Принадлежности для твердотельных термостатов
+- `vortex-accessories.jpg` — Принадлежности для вортексов
+- `dry-block-accessories.jpg` — Принадлежности для твердотельных термостатов
 
 ## Если фото не класть вручную
 
