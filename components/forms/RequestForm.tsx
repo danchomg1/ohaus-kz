@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { trackLead } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 type Values = {
@@ -80,6 +81,7 @@ export default function RequestForm({ product }: { product?: string }) {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
+        trackLead(product);
         setStatus("sent");
         return;
       }

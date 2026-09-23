@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { roboto, openSans } from "./fonts";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, absoluteUrl } from "@/lib/site";
 import "./globals.css";
@@ -46,6 +47,7 @@ export default function RootLayout({
     <html lang="ru" className={`${roboto.variable} ${openSans.variable}`}>
       <body className="min-h-screen bg-ohaus-bg font-sans text-ohaus-ink">
         {children}
+        <GoogleAnalytics />
       </body>
     </html>
   );
